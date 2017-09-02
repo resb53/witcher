@@ -69,7 +69,7 @@ maze = { "n" : {
   'ka': '', 'kb': 'rb', 'kc': '', 'kd': 's', 'ke': 's', 'kf': 'de', 'kg': '', 'kh': 's', 'ki': 's', 'kj': 'st', 'kk': '', 'kl': 'rt', 'km': 's', 'kn': 'rb', 'ko': '', 'kp': '', 'kq': 's', 'kr': 'rt', 'ks': 's', 'kt': 'rb', 'ku': '', 'kv': '', 'kw': 's', 'kx': 'rb', 'ky': '', 'kz': 'rb', 'k1': '', 'k2': 's', 'k3': 's', 'k4': 'rb', 'la': '',
   'lb': '', 'lc': '', 'ld': 's', 'le': 'rt', 'lf': 'rt', 'lg': 'lt', 'lh': 's', 'li': 'de', 'lj': '', 'lk': '', 'll': '', 'lm': '', 'ln': 'lb', 'lo': '', 'lp': 's', 'lq': 's', 'lr': 'lb', 'ls': '', 'lt': '', 'lu': '', 'lv': 's', 'lw': 'rb', 'lx': '', 'ly': 's', 'lz': 'st', 'l1': '', 'l2': '', 'l3': 'rb', 'l4': '',
   'ma': '', 'mb': 'x', 'mc': 's', 'md': 'rb', 'me': '', 'mf': '', 'mg': '', 'mh': 's', 'mi': 's', 'mj': 'st', 'mk': '', 'ml': 'lt', 'mm': 's', 'mn': 's', 'mo': 'st', 'mp': '', 'mq': 'rt', 'mr': 'rb', 'ms': '', 'mt': '', 'mu': '', 'mv': '', 'mw': 'lt', 'mx': 'rt', 'my': 'rb', 'mz': '', 'm1': '', 'm2': '', 'm3': '', 'm4': '',
-  'na': '', 'nb': 'st', 'nc': '', 'nd': '', 'ne': '', 'nf': '', 'ng': '', 'nh': 'rt', 'ni': 'rb', 'nj': '', 'nk': '', 'nl': '', 'nm': 's', 'nn': 'oc', 'no': '', 'np': '', 'nq': '', 'nr': '', 'ns': '', 'nt': '', 'nu': '', 'nv': '', 'nw': '', 'nx': 'lb', 'ny': '', 'nz': '', 'n1': 's', 'n2': 's', 'n3': 'lb', 'n4': '',
+  'na': '', 'nb': 'st', 'nc': '', 'nd': '', 'ne': '', 'nf': '', 'ng': '', 'nh': 'rt', 'ni': 'rb', 'nj': '', 'nk': '', 'nl': '', 'nm': 's', 'nn': 'oc', 'no': '', 'np': '', 'nq': '', 'nr': '', 'ns': '', 'nt': '', 'nu': '', 'nv': '', 'nw': '', 'nx': 'lb', 'ny': '', 'nz': '', 'n1': '', 'n2': 's', 'n3': 'lb', 'n4': '',
   'oa': '', 'ob': '', 'oc': '', 'od': 'lb', 'oe': '', 'of': '', 'og': 'rb', 'oh': '', 'oi': '', 'oj': '', 'ok': '', 'ol': '', 'om': 'rt', 'on': 's', 'oo': 'st', 'op': '', 'oq': '', 'or': '', 'os': '', 'ot': '', 'ou': '', 'ov': '', 'ow': 's', 'ox': 's', 'oy': 'x', 'oz': 's', 'o1': 'lb', 'o2': '', 'o3': 's', 'o4': 'lb',
   'pa': '', 'pb': 'lt', 'pc': 's', 'pd': 's', 'pe': 'st', 'pf': '', 'pg': '', 'ph': '', 'pi': '', 'pj': '', 'pk': '', 'pl': 'de', 'pm': '', 'pn': '', 'po': 'lb', 'pp': '', 'pq': '', 'pr': '', 'ps': '', 'pt': '', 'pu': '', 'pv': 's', 'pw': 's', 'px': 'rb', 'py': '', 'pz': '', 'p1': 's', 'p2': 'lt', 'p3': 's', 'p4': 'rb',
   'qa': '', 'qb': '', 'qc': '', 'qd': 'de', 'qe': '', 'qf': '', 'qg': '', 'qh': 's', 'qi': 'lb', 'qj': '', 'qk': '', 'ql': 's', 'qm': 'st', 'qn': '', 'qo': 's', 'qp': 'lb', 'qq': '', 'qr': '', 'qs': 'lb', 'qt': '', 'qu': '', 'qv': '', 'qw': 'rb', 'qx': '', 'qy': '', 'qz': '', 'q1': '', 'q2': 's', 'q3': 'rb', 'q4': '',
@@ -101,7 +101,7 @@ maze = { "n" : {
   'ka': '', 'kb': '', 'kc': '', 'kd': '', 'ke': '', 'kf': '', 'kg': '', 'kh': '', 'ki': '', 'kj': 'rt', 'kk': '', 'kl': '', 'km': '', 'kn': '', 'ko': 's', 'kp': '', 'kq': '', 'kr': '', 'ks': '', 'kt': '', 'ku': 's', 'kv': '', 'kw': '', 'kx': '', 'ky': '', 'kz': '', 'k1': '', 'k2': '', 'k3': '', 'k4': '',
   'la': 'de', 'lb': 's', 'lc': 'lb', 'ld': '', 'le': '', 'lf': '', 'lg': 'st', 'lh': '', 'li': '', 'lj': 's', 'lk': 'de', 'll': 's', 'lm': '', 'ln': 'rb', 'lo': 'lt', 'lp': '', 'lq': '', 'lr': 'rb', 'ls': '', 'lt': 's', 'lu': 'lt', 'lv': '', 'lw': '', 'lx': 'lb', 'ly': '', 'lz': 'rt', 'l1': 's', 'l2': '', 'l3': '', 'l4': 's',
   'ma': '', 'mb': 'x', 'mc': '', 'md': '', 'me': 's', 'mf': 's', 'mg': '', 'mh': '', 'mi': '', 'mj': 'rt', 'mk': '', 'ml': 'st', 'mm': '', 'mn': '', 'mo': 'rt', 'mp': '', 'mq': '', 'mr': '', 'ms': 's', 'mt': 's', 'mu': 's', 'mv': '', 'mw': 'st', 'mx': '', 'my': '', 'mz': 's', 'm1': 's', 'm2': 'de', 'm3': 's', 'm4': 's',
-  'na': '', 'nb': 'rt', 'nc': '', 'nd': 's', 'ne': 's', 'nf': 'de', 'ng': 'lb', 'nh': '', 'ni': '', 'nj': 's', 'nk': 's', 'nl': '', 'nm': '', 'nn': '', 'no': 's', 'np': 's', 'nq': 's', 'nr': 's', 'ns': 'lb', 'nt': 'lt', 'nu': 's', 'nv': 's', 'nw': '', 'nx': 'rb', 'ny': 's', 'nz': 'de', 'n1': 's', 'n2': '', 'n3': 'rb', 'n4': 's',
+  'na': '', 'nb': 'rt', 'nc': '', 'nd': 's', 'ne': 's', 'nf': 'de', 'ng': 'lb', 'nh': '', 'ni': '', 'nj': 's', 'nk': 's', 'nl': '', 'nm': '', 'nn': '', 'no': 's', 'np': 's', 'nq': 's', 'nr': 's', 'ns': 'lb', 'nt': 'lt', 'nu': 's', 'nv': 's', 'nw': '', 'nx': 'rb', 'ny': 's', 'nz': 'de', 'n1': 'lt', 'n2': '', 'n3': 'rb', 'n4': 's',
   'oa': 'de', 'ob': 's', 'oc': 'lb', 'od': 'rb', 'oe': 's', 'of': '', 'og': '', 'oh': 's', 'oi': 's', 'oj': 's', 'ok': 's', 'ol': 'lb', 'om': '', 'on': '', 'oo': 'rt', 'op': 's', 'oq': 's', 'or': 's', 'os': '', 'ot': 's', 'ou': 'de', 'ov': 'lb', 'ow': '', 'ox': '', 'oy': 'x', 'oz': '', 'o1': 'rb', 'o2': '', 'o3': '', 'o4': 'rb',
   'pa': '', 'pb': 'st', 'pc': '', 'pd': '', 'pe': 'rt', 'pf': 's', 'pg': 's', 'ph': 'de', 'pi': 's', 'pj': 's', 'pk': 'lb', 'pl': '', 'pm': 's', 'pn': '', 'po': 'rb', 'pp': 's', 'pq': 's', 'pr': 's', 'ps': 's', 'pt': 's', 'pu': '', 'pv': '', 'pw': '', 'px': '', 'py': 's', 'pz': '', 'p1': '', 'p2': 'st', 'p3': '', 'p4': '',
   'qa': 's', 'qb': '', 'qc': '', 'qd': '', 'qe': 'de', 'qf': 's', 'qg': 'lb', 'qh': '', 'qi': 'rb', 'qj': 's', 'qk': '', 'ql': '', 'qm': 'rt', 'qn': 'lb', 'qo': '', 'qp': 'rb', 'qq': 's', 'qr': 'lb', 'qs': 'rb', 'qt': 's', 'qu': 's', 'qv': '', 'qw': '', 'qx': 's', 'qy': 's', 'qz': 's', 'q1': '', 'q2': '', 'q3': '', 'q4': 's',
@@ -160,12 +160,12 @@ def main():
     #Based on N mapping
     resn = {
       "x" :"x",
-      "st":"",
-      "lt":"rt",
-      "rt":"lt",
-      "s" :"s",
+      "st":"lt",
+      "lt":"",
+      "rt":"st",
+      "s" :"",
       "lb":"",
-      "rb":"",
+      "rb":"lb",
       "oc":"",
       "or":"",
       "op":"",
@@ -178,6 +178,24 @@ def main():
     #Based on E mapping
     rese = {
       "x" :"x",
+      "st":"",
+      "lt":"rt",
+      "rt":"lt",
+      "s" :"s",
+      "lb":"",
+      "rb":"",
+      "oc":"",
+      "or":"",
+      "op":"",
+      "de":"",
+      ""  :"mod"
+    }[tilee]
+
+    tiles = maze["s"][item]
+
+    #Based on S mapping
+    ress = {
+      "x" :"x",
       "st":"rt",
       "lt":"st",
       "rt":"",
@@ -189,25 +207,25 @@ def main():
       "op":"",
       "de":"",
       ""  :"mod"
-    }[tilee]
+    }[tiles]
 
-    #checkTiles(resn,rese)
+    checkTiles(item,resn,rese,ress)
 
     #If both mod, request more information:
-    if resn == "mod" and rese != "mod":
-      result = rese
-    elif resn != "mod" and rese == "mod":
-      result = resn
-    elif resn == "mod" and rese == "mod":
-      result = getInput(item)
-    elif rese == resn:
-      result = resn
-    else:
-      print("Error: " + item, file=sys.stderr)
+    #if resn == "mod" and rese != "mod":
+    #  result = rese
+    #elif resn != "mod" and rese == "mod":
+    #  result = resn
+    #elif resn == "mod" and rese == "mod":
+    #  result = getInput(item)
+    #elif rese == resn:
+    #  result = resn
+    #else:
+    #  print("Error: " + item, file=sys.stderr)
 
-    maze["s"][item] = result
+    #maze["s"][item] = result
 
-  print(maze["s"])
+  #print(maze["s"])
 
 def getInput(loc):
   print("Enter input for " + loc + ":", file=sys.stderr)
@@ -217,17 +235,23 @@ def getInput(loc):
     res = input()
   return res
 
-def checkTiles(resn,rese):
+def checkTiles(item,resn,rese,ress):
   #check suggestions
-  if resn != rese:
-    if not resn:
-      result = rese
-    elif not rese:
-      result = resn
-    elif (resn == "mod") or (rese == "mod"):
-      pass #do nothing
+  if resn != rese or resn != ress or rese != ress:
+    if resn and (not rese or rese == "mod") and (not ress or ress == "mod"):
+      pass
+    elif (not resn or resn == "mod") and rese and (not ress or ress == "mod"):
+      pass
+    elif (not resn or resn == "mod") and (not rese or rese == "mod") and ress:
+      pass
+    elif resn == rese and (not ress or ress == "mod"):
+      pass
+    elif resn == ress and (not rese or rese == "mod"):
+      pass
+    elif rese == ress and (not resn or resn == "mod"):
+      pass
     else:
-      print("for " + item + ": resn = " + resn + "; rese = " + rese)
+      print("for " + item + ": resn = " + resn + "; rese = " + rese + "; ress = " + ress)
 
 if __name__ == "__main__":
   main()
