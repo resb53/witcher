@@ -209,23 +209,35 @@ def main():
       ""  :"mod"
     }[tiles]
 
-    checkTiles(item,resn,rese,ress)
+    #checkTiles(item,resn,rese,ress)
 
-    #If both mod, request more information:
-    #if resn == "mod" and rese != "mod":
-    #  result = rese
-    #elif resn != "mod" and rese == "mod":
-    #  result = resn
-    #elif resn == "mod" and rese == "mod":
-    #  result = getInput(item)
-    #elif rese == resn:
-    #  result = resn
-    #else:
-    #  print("Error: " + item, file=sys.stderr)
+    #If all mod, request more information:
+    if resn == "mod" and rese == "mod" and ress == "mod":
+      #Only other option should be deadend looking west
+      result = "de"
+    elif resn == "mod":
+      if rese != "mod":
+        result = rese
+      elif ress != "mod":
+        result = ress
+    elif rese == "mod":
+      if resn != "mod":
+        result = resn
+      elif ress != "mod":
+        result = ress
+    elif ress == "mod":
+      if resn != "mod":
+        result = resn
+      elif rese != "mod":
+        result = rese
+    elif resn == rese == ress:
+      result = resn
+    else:
+      print("Error: " + item, file=sys.stderr)
 
-    #maze["s"][item] = result
+    maze["w"][item] = result
 
-  #print(maze["s"])
+  print(maze["w"])
 
 def getInput(loc):
   print("Enter input for " + loc + ":", file=sys.stderr)
