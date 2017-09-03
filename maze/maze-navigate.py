@@ -9,7 +9,7 @@ with open('maze.json', 'r') as f:
   maze = json.load(f)
 
 # Cardinal views
-cardinals = ["n", "e", "w", "s"]
+cardinals = ["n", "e", "s", "w"]
 
 # base30
 axes = ["a","b","c","d","e","f","g","h","i","j",
@@ -74,21 +74,38 @@ def navigate(action, face, locn):
   [y, x] = [locn[0], locn[1]]
   yi = axes.index(y)
   xi = axes.index(x)
+
   #Calculate new attributes
   if action == "w":
     #Move forwards a square in the direction faced, don't change direction.
-    #if face = 0:
-    pass
-  elif action == "d":
-    pass
-  elif action == "s":
-    pass
-  elif action == "a":
-    pass
-  else:
-    print("Error")
+    newFace = face
 
-  return [0,"3k"]
+  elif action == "d":
+    #Turn facing clockwise 1 cardinal point, and move a square in that direction
+    newFace = (face + 1) % 4
+
+  elif action == "s":
+    #Reverse facing, and move view a tile backwards
+    newFace = (face + 2) % 4
+
+  elif action == "a":
+    #Turn facing anticlockwise 1 cardinal point, and move a square in that direction
+    newFace = (face - 1) % 4
+
+  newLocn = calcNewSquare(yi, xi, newFace)
+  return [newFace,newLocn]
+
+#Calculate next square to present based on provided parameters
+def calcNewSquare(yi, xi, dn):
+  if dn == 0:
+    yi -= 1
+  elif dn == 1:
+    xi += 1
+  elif dn == 2:
+    yi += 1
+  elif dn == 3:
+    xi -= 1
+  return str(axes[yi]) + str(axes[xi])
 
 if __name__ == "__main__":
     main()
