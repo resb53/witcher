@@ -44,6 +44,7 @@ options = { "x" : ["w","d","s","a"],
 
 movement = ["w","d","s","a"]
 
+#Navigate around the map - give infomation that would appear to the user
 def main():
   # Initialise
   curDir = 0
@@ -53,7 +54,7 @@ def main():
     print("You are looking " + cardinals[curDir] + " into square " + curPos);
     tile = maze[cardinals[curDir]][curPos]
 
-    print("You see image " + tiles[tile] + " and can choose to travel: " + str(options[tile]))
+    print("You see image " + getColour(curPos) + "/" + tiles[tile] + " and can choose to travel: " + str(options[tile]))
 
     travel = getUserAction(tile);
 
@@ -71,8 +72,7 @@ def getUserAction(tile):
 #Can assume valid move based on User Action Checks
 def navigate(action, face, locn):
   #Breakdown location
-  yi = axes.index(locn[0])
-  xi = axes.index(locn[1])
+  [yi, xi] = breakdownLoc(locn)
 
   #Calculate new attributes
   newFace = {
@@ -85,6 +85,12 @@ def navigate(action, face, locn):
 
   return [newFace,newLocn]
 
+#Separate location into numeric values for each axes
+def breakdownLoc(pos):
+  yi = axes.index(pos[0])
+  xi = axes.index(pos[1])
+  return [yi, xi]
+
 #Calculate next square to present based on provided parameters
 def calcNewSquare(yi, xi, dn):
   if dn == 0:
@@ -96,6 +102,34 @@ def calcNewSquare(yi, xi, dn):
   elif dn == 3:
     xi -= 1
   return str(axes[yi]) + str(axes[xi])
+
+#Retrieve correct coloured image
+def getColour(pos):
+  [y, x] = breakdownLoc(pos)
+
+  if 0 <= y <= 9:
+    if 0 <= x <= 9:
+      col = "a"
+    elif 10 <= x <= 19:
+      col = "b"
+    elif 20 <= x <= 29:
+      col = "c"
+  elif 10 <= y <= 19:
+    if 0 <= x <= 9:
+      col = "d"
+    elif 10 <= x <= 19:
+      col = "e"
+    elif 20 <= x <= 29:
+      col = "f"
+  elif 20 <= y <= 29:
+    if 0 <= x <= 9:
+      col = "g"
+    elif 10 <= x <= 19:
+      col = "h"
+    elif 20 <= x <= 29:
+      col = "i"
+
+  return col
 
 if __name__ == "__main__":
     main()
