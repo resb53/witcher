@@ -71,28 +71,18 @@ def getUserAction(tile):
 #Can assume valid move based on User Action Checks
 def navigate(action, face, locn):
   #Breakdown location
-  [y, x] = [locn[0], locn[1]]
-  yi = axes.index(y)
-  xi = axes.index(x)
+  yi = axes.index(locn[0])
+  xi = axes.index(locn[1])
 
   #Calculate new attributes
-  if action == "w":
-    #Move forwards a square in the direction faced, don't change direction.
-    newFace = face
-
-  elif action == "d":
-    #Turn facing clockwise 1 cardinal point, and move a square in that direction
-    newFace = (face + 1) % 4
-
-  elif action == "s":
-    #Reverse facing, and move view a tile backwards
-    newFace = (face + 2) % 4
-
-  elif action == "a":
-    #Turn facing anticlockwise 1 cardinal point, and move a square in that direction
-    newFace = (face - 1) % 4
-
+  newFace = {
+    "w": face,
+    "d": (face + 1) % 4,
+    "s": (face + 2) % 4,
+    "a": (face + 3) % 4
+  }[action]
   newLocn = calcNewSquare(yi, xi, newFace)
+
   return [newFace,newLocn]
 
 #Calculate next square to present based on provided parameters
