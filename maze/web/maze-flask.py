@@ -38,10 +38,10 @@ options = { "x" : ["w","d","s","a"],
             "s" : ["w","s"],
             "lb": ["s","a"],
             "rb": ["d","s"],
-            "oc": ["s"],
-            "or": ["s"],
-            "op": ["s"],
-            "de": ["s"] }
+            "oc": ["s","action"],
+            "or": ["s","action"],
+            "op": ["s","action"],
+            "de": ["s","action"] }
 
 movement = ["w","d","s","a"]
 
@@ -51,11 +51,10 @@ curPos = "3k"
 
 # Parse tile id
 def setLoc(t):
+  global curDir, curPos
   parts = list(t)
-  global curDir
   curDir = cardinals.index(parts[2])
-  global curPos
-  curPos = ''.join([ parts[0], parts[1] ]) 
+  curPos = "".join([ parts[0], parts[1] ]) 
 
 # Get colour from current grid position
 def getColour(pos):
@@ -103,10 +102,13 @@ def index():
   else:
     setLoc("3kn")
 
+  tile = maze[cardinals[curDir]][curPos]
+
   loc = { "face": cardinals[curDir],
           "tile": curPos,
           "zone": getColour(curPos),
-          "image": tiles[maze[cardinals[curDir]][curPos]] }
+          "image": tiles[tile],
+          "allowed": options[tile] }
 
   return render_template('./index.html', loc=loc)
 
@@ -123,11 +125,45 @@ def send_img(path):
   return send_from_directory('img', path)
 
 # Maze specific web features
-#@app.route("/gettile.jpg")
-#def get_tile():
-  # Calculate appropriate tile image and return it
-#  image = "/".join([ getColour(curPos), tiles[maze[cardinals[curDir]][curPos]] ])
-#  return send_from_directory('img', image)
+@app.route("/navigate")
+def navigate():
+  global curDir, curPos
+  args = request.args
+  if "a" in args:
+    if args["a"] == "action":
+      #Do action stuff
+      foo = 1
+    else:
+      # Get current attributes
+      [yi, xi] = breakdownLoc(curPos)
+      # Calculate new direction
+      curDir = {
+        "w": curDir,
+        "d": (curDir + 1) %4,
+        "s": (curDir + 2) %4,
+        "a": (curDir + 3) %4
+      }[args["a"]]
+      # Calculate new position
+      if curDir == 0:
+        yi -= 1
+      elif curDir == 1:
+        xi += 1
+      elif curDir == 2:
+        yi += 1
+      elif curDir == 3:
+        xi -= 1
+      curPos = "".join([axes[yi], axes[xi]])
+
+      # Prep new vars to return to client
+      tile = maze[cardinals[curDir]][curPos]
+
+      loc = { "face": cardinals[curDir],
+              "tile": curPos,
+              "zone": getColour(curPos),
+              "image": tiles[tile],
+              "allowed": options[tile] }
+
+      return json.dumps(loc, separators=(',',':'))
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=int(80))

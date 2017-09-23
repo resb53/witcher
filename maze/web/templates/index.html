@@ -26,8 +26,22 @@
   <body>
     <h1>Welcome to Morph Maze!</h1>
     <div id="game">
-      <img id="view" />
+      <table id="control">
+        <tr>
+          <td></td>
+          <td><img id="st" title="W" alt="W"/></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><img id="lt" title="A" alt="A"/></td>
+          <td><img id="view" /></td>
+          <td><img id="rt" title="D" alt="D"/></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><img id="tn" src="img/Turn.png" alt="S"/></td>
+          <td></td>
+        </tr>
     </div>
-    <p style="color:red">You are looking <strong>{{ loc["face"] }}</strong> into <strong>{{ loc["tile"] }}</strong> in zone <strong>{{ loc["zone"] }}</strong> represented by image <strong>{{ loc["image"] }}</strong></p>
   </body>
 </html>
