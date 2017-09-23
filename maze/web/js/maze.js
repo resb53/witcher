@@ -41,10 +41,10 @@ $(window).keypress(function(e) {
 
 // Carry out a user action
 var navigate = function(a) {
-  $.getJSON("navigate?a=" + a, function(data) {
+  $.getJSON("navigate?a=" + a + "&t=" + loc["tile"] + loc["face"], function(data) {
     loc = data
     $("#view").fadeTo(250, 0.7, function() {
-      $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"] + "?t=" + loc["tile"] + loc["face"]).fadeTo(250, 1);
+      $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"] +).fadeTo(250, 1);
       populateArrows();
       navok = true;
     });
