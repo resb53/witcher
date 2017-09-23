@@ -1,15 +1,15 @@
 #!/usr/local/bin/python3
 
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, request
 
 app = Flask(__name__)
 
-@app.route("/", method=['GET'])
+@app.route("/")
 def index():
   cur_tile = "n3kh"
   args = request.args
   if "t" in args:
-    cur_tile = args.t
+    cur_tile = args["t"]
   loc = parse_tile(cur_tile)
   return render_template('./index.html', loc=loc)
 
@@ -28,7 +28,7 @@ def send_img(path):
 def parse_tile(t):
   parts = list(t)
   loc = { "face": parts[0],
-          "tile": ''.join([parts[1],parts[2]),
+          "tile": ''.join([parts[1],parts[2]]),
           "zone": parts[3] }
   return loc
 
