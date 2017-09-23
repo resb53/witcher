@@ -6,12 +6,23 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+  # If new player, give starting tile
   cur_tile = "n3kh"
   args = request.args
+
+  # Parse and check the tile request
   if "t" in args:
     cur_tile = args["t"]
   loc = parse_tile(cur_tile)
+
   return render_template('./index.html', loc=loc)
+
+@app.route("/gettile.jpg")
+def get_tile():
+  # Calculate appropriate tile image and return it
+  image = "h/straight.jpg"
+
+  return send_from_directory('img', image)
 
 @app.route("/js/<path:path>")
 def send_js(path):

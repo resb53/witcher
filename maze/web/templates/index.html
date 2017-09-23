@@ -14,17 +14,21 @@
     <![endif]-->
 
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/maze.js"></script>
 
     <script type="text/javascript">
-      $(document).ready(function() {
-        document.title = "The Maze";
-      });
+      // Get location details from python
+      var loc = {{ loc }}
     </script>
+
+    <title>The Maze</title>
   </head>
 
   <body>
     <h1>Welcome to Morph Maze!</h1>
-    <img src="img/e/crossroads.jpg"/>
+    <div id="game">
+      <img id="view" />
+    </div>
     <p style="color:red">You are looking <strong>{{ loc["face"] }}</strong> into <strong>{{ loc["tile"] }}</strong> in zone <strong>{{ loc["zone"] }}</strong></p>
   </body>
 </html>
