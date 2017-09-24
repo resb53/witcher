@@ -4,7 +4,7 @@ body {
   font-family: "Verdana", Sans-serif;
 }
 h1 {
-  color: black;
+  color: rgba(255, 255, 128, 1);
   font-style: bold;
   text-align: center;
 }
