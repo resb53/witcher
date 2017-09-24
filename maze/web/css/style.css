@@ -1,9 +1,11 @@
 body {
   background-color: grey;
   background: url(../img/Seamless-Stone-Wall-Texture.jpg) left top repeat;
+  font-family: "Verdana", Sans-serif;
 }
 h1 {
-  color: pink;
+  color: black;
+  font-style: bold;
   text-align: center;
 }
 img {
