@@ -1,7 +1,6 @@
 // Code for navigating the maze and interacting with the website
 $(document).ready(function() {
   $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"] + "?t=" + loc["tile"] + loc["face"]);
-  $("#tn").on('click', navigate("s"));
   populateArrows();
 });
 
@@ -52,31 +51,31 @@ var navigate = function(a) {
 // Show relevant arrows
 var populateArrows = function() {
   if (loc["allowed"].indexOf('action') >= 0) {
-    $("#st").attr("src","img/Action.png").attr("alt","Space").attr("title","Space").on('click', doAction());
+    $("#st").attr("src","img/Action.png").attr("alt","Space").attr("title","Space");
   }
   else if (loc["allowed"].indexOf('noaction') >= 0) {
-    $("#st").attr("src","img/ActionW.png").attr("alt","Space").attr("title","Space").off('click');
+    $("#st").attr("src","img/ActionW.png").attr("alt","Space").attr("title","Space");
   }
   else
   {
     if (loc["allowed"].indexOf('w') >= 0) {
-      $("#st").attr("src","img/Straight.png").attr("alt","W").attr("title","W").on('click', navigate("w"));
+      $("#st").attr("src","img/Straight.png").attr("alt","W").attr("title","W");
     }
     else {
-      $("#st").attr("src","img/StraightW.png").off('click');
+      $("#st").attr("src","img/StraightW.png");
     }
   }
   if (loc["allowed"].indexOf('a') >= 0) {
-    $("#lt").attr("src","img/Left.png").on('click', navigate("a"));
+    $("#lt").attr("src","img/Left.png");
   }
   else {
-    $("#lt").attr("src","img/LeftW.png").off('click');
+    $("#lt").attr("src","img/LeftW.png");
   }
   if (loc["allowed"].indexOf('d') >= 0) {
-    $("#rt").attr("src","img/Right.png").on('click', navigate("d"));
+    $("#rt").attr("src","img/Right.png");
   }
   else {
-    $("#rt").attr("src","img/RightW.png").off('click');
+    $("#rt").attr("src","img/RightW.png");
   }
 };
 

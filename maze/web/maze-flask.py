@@ -30,7 +30,8 @@ tiles = { "x" :"crossroads.jpg",
           "or":"orb-red.jpg",
           "op":"orb-purple.jpg",
           "od":"orb-done.jpg",
-          "de":"dead-end.jpg" }
+          "de":"dead-end.jpg",
+          "ex":"exit.jpg" }
 
 # Options for each tile
 options = { "x" : ["w","d","s","a"],
@@ -43,8 +44,9 @@ options = { "x" : ["w","d","s","a"],
             "oc": ["s","action"],
             "or": ["s","action"],
             "op": ["s","action"],
-            "od": ["s"],
-            "de": ["s","action"] }
+            "od": ["s","noaction"],
+            "de": ["s"],
+            "ex": ["s","action"] }
 
 movement = ["w","d","s","a"]
 
