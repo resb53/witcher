@@ -31,7 +31,8 @@ tiles = { "x" :"crossroads.jpg",
           "op":"orb-purple.jpg",
           "od":"orb-done.jpg",
           "de":"dead-end.jpg",
-          "ex":"exit.jpg" }
+          "ex":"exit.jpg",
+          "md":"maze-done.jpg" }
 
 # Options for each tile
 options = { "x" : ["w","d","s","a"],
@@ -46,7 +47,8 @@ options = { "x" : ["w","d","s","a"],
             "op": ["s","action"],
             "od": ["s","noaction"],
             "de": ["s"],
-            "ex": ["s","action"] }
+            "ex": ["s","action"],
+            "md": [] }
 
 movement = ["w","d","s","a"]
 
@@ -174,7 +176,10 @@ def doAction():
     # Try to do the action
     tile = maze[cardinals[curDir]][curPos]
     if act[tile]:
-      maze[cardinals[curDir]][curPos] = "od"
+      if tile == "ex":
+        maze[cardinals[curDir]][curPos] = "md"
+      else:
+        maze[cardinals[curDir]][curPos] = "od"
       act[tile] = 0
 
     return json.dumps(getLoc(), separators=(',',':'))
