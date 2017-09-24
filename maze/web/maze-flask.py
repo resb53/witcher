@@ -8,6 +8,7 @@ import json
 # Prepare maze details
 with open('maze.json', 'r') as f:
   maze = json.load(f)
+  f.close()
 
 # Cardinal views
 cardinals = ["n", "e", "s", "w"]
@@ -28,6 +29,7 @@ tiles = { "x" :"crossroads.jpg",
           "oc":"orb-cyan.jpg",
           "or":"orb-red.jpg",
           "op":"orb-purple.jpg",
+          "od":"orb-done.jpg",
           "de":"dead-end.jpg" }
 
 # Options for each tile
@@ -41,9 +43,16 @@ options = { "x" : ["w","d","s","a"],
             "oc": ["s","action"],
             "or": ["s","action"],
             "op": ["s","action"],
+            "od": ["s"],
             "de": ["s","action"] }
 
 movement = ["w","d","s","a"]
+
+# Orb status
+act = { "oc": 1,
+        "or": 1,
+        "op": 1,
+        "ex": 1 }
 
 # Initialise
 curDir = 0
@@ -84,11 +93,22 @@ def getColour(pos):
 
   return col
 
-#Separate location into numeric values for each axes
+# Separate location into numeric values for each axes
 def breakdownLoc(pos):
   yi = axes.index(pos[0])
   xi = axes.index(pos[1])
   return [yi, xi]
+
+# Prepare object to return to JS
+def getLoc():
+  tile = maze[cardinals[curDir]][curPos]
+
+  return { "face": cardinals[curDir],
+           "tile": curPos,
+           "zone": getColour(curPos),
+           "image": tiles[tile],
+           "allowed": options[tile],
+           "action": act }
 
 # Create webapp
 app = Flask(__name__)
@@ -102,15 +122,7 @@ def index():
   else:
     setLoc("3kn")
 
-  tile = maze[cardinals[curDir]][curPos]
-
-  loc = { "face": cardinals[curDir],
-          "tile": curPos,
-          "zone": getColour(curPos),
-          "image": tiles[tile],
-          "allowed": options[tile] }
-
-  return render_template('./index.html', loc=loc)
+  return render_template('./index.html', loc=getLoc())
 
 @app.route("/js/<path:path>")
 def send_js(path):
@@ -130,40 +142,58 @@ def navigate():
   global curDir, curPos
   args = request.args
   if "a" in args:
-    if args["a"] == "action":
-      #Do action stuff
-      foo = 1
-    else:
-      # Get current attributes
-      [yi, xi] = breakdownLoc(curPos)
-      # Calculate new direction
-      curDir = {
-        "w": curDir,
-        "d": (curDir + 1) %4,
-        "s": (curDir + 2) %4,
-        "a": (curDir + 3) %4
-      }[args["a"]]
-      # Calculate new position
-      if curDir == 0:
-        yi -= 1
-      elif curDir == 1:
-        xi += 1
-      elif curDir == 2:
-        yi += 1
-      elif curDir == 3:
-        xi -= 1
-      curPos = "".join([axes[yi], axes[xi]])
+    # Get current attributes
+    [yi, xi] = breakdownLoc(curPos)
+    # Calculate new direction
+    curDir = {
+      "w": curDir,
+      "d": (curDir + 1) %4,
+      "s": (curDir + 2) %4,
+      "a": (curDir + 3) %4
+    }[args["a"]]
+    # Calculate new position
+    if curDir == 0:
+      yi -= 1
+    elif curDir == 1:
+      xi += 1
+    elif curDir == 2:
+      yi += 1
+    elif curDir == 3:
+      xi -= 1
+    curPos = "".join([axes[yi], axes[xi]])
 
-      # Prep new vars to return to client
-      tile = maze[cardinals[curDir]][curPos]
+    return json.dumps(getLoc(), separators=(',',':'))
 
-      loc = { "face": cardinals[curDir],
-              "tile": curPos,
-              "zone": getColour(curPos),
-              "image": tiles[tile],
-              "allowed": options[tile] }
+@app.route("/doaction")
+def doAction():
+  global act, maze
+  args = request.args
+  if "t" in args:
+    # Try to do the action
+    tile = maze[cardinals[curDir]][curPos]
+    if act[tile]:
+      maze[cardinals[curDir]][curPos] = "od"
+      act[tile] = 0
 
-      return json.dumps(loc, separators=(',',':'))
+    return json.dumps(getLoc(), separators=(',',':'))
+
+@app.route("/reset")
+def reset():
+  global maze, curDir, curPos, act
+  # Reset Maze
+  with open('maze.json', 'r') as f:
+    maze = json.load(f)
+    f.close()
+  # Reset Start
+  curDir = 0
+  curPos = "3k"
+  # Reset Actions
+  act = { "oc": 1,
+          "or": 1,
+          "op": 1,
+          "ex": 1 }
+  
+  return ('Maze Reset Succesfully.', 200)
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=int(80))

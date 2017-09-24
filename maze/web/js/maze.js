@@ -10,37 +10,34 @@ var navok = true;
 $(window).keypress(function(e) {
   if (navok && (e.which == 87 || e.which == 119)) {
     if (loc["allowed"].indexOf('w') >= 0) {
-      navok = false;
-      navigate("w")
+      navigate("w");
     }
   }
   if (navok && (e.which == 65 || e.which == 97)) {
     if (loc["allowed"].indexOf('a') >= 0) {
-      navok = false;
-      navigate("a")
+      navigate("a");
     }
   }
   if (navok && (e.which == 83 || e.which == 115)) {
     if (loc["allowed"].indexOf('s') >= 0) {
-      navok = false;
-      navigate("s")
+      navigate("s");
     }
   }
   if (navok && (e.which == 68 || e.which == 100)) {
     if (loc["allowed"].indexOf('d') >= 0) {
-      navok = false;
-      navigate("d")
+      navigate("d");
     }
   }
   if (navok && (e.which == 32)) {
     if (loc["allowed"].indexOf('action') >= 0) {
-      // Do stuff
+      doAction();
     }
   }
 });
 
-// Carry out a user action
+// Carry out a user movement
 var navigate = function(a) {
+  navok = false;
   $.getJSON("navigate?a=" + a + "&t=" + loc["tile"] + loc["face"], function(data) {
     loc = data
     $("#view").fadeTo(250, 0.7, function() {
@@ -71,4 +68,17 @@ var populateArrows = function() {
   else {
     $("#rt").attr("src","img/RightW.png");
   }
+};
+
+// Carry out a user action (only called if allowed)
+var doAction = function() {
+  navok = false;
+  $.getJSON("doaction?t=" + loc["tile"] + loc["face"], function(data) {
+    loc = data
+    $("#view").fadeTo(250, 0.7, function() {
+      $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"]).fadeTo(250, 1);
+      populateArrows();
+      navok = true;
+    });
+  });
 };
