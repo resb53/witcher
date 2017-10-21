@@ -1,0 +1,29 @@
+body {
+  background-color: grey;
+  background: url(../img/Seamless-Stone-Wall-Texture.jpg) left top repeat;
+  font-family: "Verdana", Sans-serif;
+}
+h1 {
+  color: rgba(255, 255, 128, 1);
+  font-style: bold;
+  text-align: center;
+}
+img {
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+}
+#view {
+  border-radius: 5px;
+  border: 3px solid #000000;
+  max-height: 100%;
+  max-width: 100%;
+}
+table {
+  border: none;
+  margin: 0 auto;
+}
+td {
+  vertical-align: middle;
+  text-align: center;
+}
