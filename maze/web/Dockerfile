@@ -4,7 +4,7 @@ MAINTAINER resb53 <resb53.git@gmail.com>
 
 USER root
 
-EXPOSE 80
+EXPOSE 31331
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -26,4 +26,4 @@ RUN apk add --no-cache bash python3 \
   && pip3 install --upgrade pip \
   && pip3 install flask
 
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "80"]
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "31331"]
