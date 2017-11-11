@@ -1,5 +1,6 @@
 // Globals
 var curtab = ''
+var rstat = 0;
 
 // Code for initialising the view
 $(document).ready(function() {
@@ -48,6 +49,9 @@ $(document).ready(function() {
     }
   });
 
+  // Load text into tablets
+  load_riddles(rstat);
+  
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
     //update_log($(this).attr('id') + ' clicked.');
@@ -75,4 +79,10 @@ function update_log(newval) {
     $("#record_"+i).text(new_text);
     new_text = old_text;
   }
+}
+
+function load_riddles(s) {
+  $.get("getriddle?r=" + s, function(data) {
+    $("#cyantext").text(data["foo"]);
+  });
 }

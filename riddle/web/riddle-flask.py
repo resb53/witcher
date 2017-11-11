@@ -24,10 +24,12 @@ def process_query():
   return json.dumps(response)
 
 @app.route("/getriddle")
+def send_riddles():
   args = request.args
   if "r" in args:
-    return "Your riddle text here for " + args["r"]
-  else
+    response = { 'foo': "Your riddle text here for " + args["r"] + "." }
+    return json.dumps(response)
+  else:
     return ("Invalid request", 400)
 
 @app.route("/js/<path:path>")
