@@ -23,6 +23,13 @@ def process_query():
   response = { 'msg' : 'Received: ' + data['solution'] }
   return json.dumps(response)
 
+@app.route("/getriddle")
+  args = request.args
+  if "r" in args:
+    return "Your riddle text here for " + args["r"]
+  else
+    return ("Invalid request", 400)
+
 @app.route("/js/<path:path>")
 def send_js(path):
   return send_from_directory('js', path)

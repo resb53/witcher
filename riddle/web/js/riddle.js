@@ -1,3 +1,6 @@
+// Globals
+var curtab = ''
+
 // Code for initialising the view
 $(document).ready(function() {
   $("#base").attr("src","img/Riddler.png");
@@ -5,21 +8,31 @@ $(document).ready(function() {
   // Prepare action when text submitted
   $("#query").on("submit", function(e) {
     e.preventDefault();
-    // Submit solution
-    new_text = '> ' + $("#solution").val();
-    $.ajax({
-      url: '/query',
-      type: 'post',
-      dataType: 'json',
-      data: $("#query").serialize(),
-      success: function(data) {
-        update_log(data['msg']);
-      }
-    });
+    // Prepare to loop through output lines, updating them
+    solsubmit = $("#solution").val();
+    update_log('> ' + solsubmit);
     // Reset input field
     $("#solution").val('');
-    // Prepare to loop through output lines, updating them
-    update_log(new_text);
+    // Prepare form
+    //dataform = $("#query").serialize();
+    if (curtab) {
+      dataform = {};
+      dataform['riddle'] = curtab;
+      dataform['solution'] = solsubmit;
+      // Submit solution
+      $.ajax({
+        url: '/query',
+        type: 'post',
+        dataType: 'json',
+        data: dataform,
+        success: function(data) {
+          update_log(data['msg']);
+        }
+      });
+    }
+    else {
+      update_log('Please have a tablet open before submitting a solution.');
+    }
   });
 
   // Handle text bar when empty / focussed / etc.
@@ -37,7 +50,20 @@ $(document).ready(function() {
 
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
-    update_log($(this).attr('id') + ' clicked.');
+    //update_log($(this).attr('id') + ' clicked.');
+    tab = '#' + $(this).attr('id') + 'tab';
+    // As a precaution, close any open tab
+    if (curtab) {
+      $(curtab).hide();
+    }
+    $(tab).show();
+    curtab = tab;
+  });
+
+  // Handled tablet closeicons
+  $(".closeicon").click( function(e) {
+    $(curtab).hide();
+    curtab = '';
   });
 });
 

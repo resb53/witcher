@@ -33,6 +33,32 @@ img {
   position: absolute;
   cursor: pointer;
 }
+.tablettext {
+  position: absolute;
+}
+.tabbox {
+  display: none;
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  border-radius: 5px;
+  border: 3px solid #333333;
+  height: 400px;
+  width: 740px;
+  font-size: 18px;
+}
+.tabspan {
+  position: absolute;
+  top: 42px;
+}
+.closeicon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
 table {
   border: none;
   margin: 0 auto;
