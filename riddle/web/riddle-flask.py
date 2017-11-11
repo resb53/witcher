@@ -12,6 +12,12 @@ app = Flask(__name__)
 def index():
   return render_template('./index.html')
 
+@app.route("/query", methods = ['POST'])
+def process_query():
+  data = request.form
+  response = { 'msg' : 'Received: ' + data['solution'] }
+  return json.dumps(response)
+
 @app.route("/js/<path:path>")
 def send_js(path):
   return send_from_directory('js', path)
