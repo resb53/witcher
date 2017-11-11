@@ -31,9 +31,7 @@ img {
 }
 .tablet {
   position: absolute;
-  top: 100px;
-  left: 100px;
-  float: left;
+  cursor: pointer;
 }
 table {
   border: none;
