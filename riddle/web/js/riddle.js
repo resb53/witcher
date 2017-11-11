@@ -1,6 +1,7 @@
 // Code for initialising the view
 $(document).ready(function() {
   $("#view").attr("src","img/init.jpg");
+
   // Prepare action when text submitted
   $("#query").on("submit", function(e) {
     e.preventDefault();
@@ -19,6 +20,19 @@ $(document).ready(function() {
     $("#solution").val('');
     // Prepare to loop through output lines, updating them
     update_log(new_text);
+  });
+
+  // Handle text bar when empty / focussed / etc.
+  $("#solution").focus( function(e) {
+    if ($(this).is(".empty")) {
+      // Remove this class, and empty the field
+      $(this).val('').removeClass('empty');
+    }
+  });
+  $("#solution").blur( function(e) {
+    if ($(this).val() == '' && $(this).not(".empty")) {
+      $(this).val('Enter solutions here...').addClass('empty');
+    }
   });
 });
 

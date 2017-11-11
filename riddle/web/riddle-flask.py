@@ -5,6 +5,10 @@ from flask import Flask, render_template, send_from_directory, request
 import sys
 import json
 
+# App logic
+def checkAnswer(ans):
+  return
+
 # Create webapp
 app = Flask(__name__)
 
@@ -15,6 +19,7 @@ def index():
 @app.route("/query", methods = ['POST'])
 def process_query():
   data = request.form
+  print(data, file=sys.stderr)
   response = { 'msg' : 'Received: ' + data['solution'] }
   return json.dumps(response)
 

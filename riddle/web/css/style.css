@@ -48,3 +48,7 @@ input {
   max-width: 900px;
   text-align: left;
 }
+.empty {
+  color: #999;
+  font-style: italic;
+}
