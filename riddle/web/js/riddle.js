@@ -1,6 +1,6 @@
 // Code for initialising the view
 $(document).ready(function() {
-  $("#view").attr("src","img/init.jpg");
+  $("#base").attr("src","img/Riddler.png");
 
   // Prepare action when text submitted
   $("#query").on("submit", function(e) {
