@@ -34,6 +34,11 @@ $(document).ready(function() {
       $(this).val('Enter solutions here...').addClass('empty');
     }
   });
+
+  // Handle clicks on tablets
+  $(".tablet").click( function(e) {
+    update_log($(this).attr('id') + ' clicked.');
+  });
 });
 
 function update_log(newval) {
