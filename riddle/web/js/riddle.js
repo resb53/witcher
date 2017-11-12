@@ -89,7 +89,7 @@ function load_riddles(s) {
     success: function(data) {
       // Fill each tabspan with their content -- response keys are span ids
       $(".tabspan").each( function() {
-        $(this).text(data[$(this).attr('id')]);
+        $(this).html(data[$(this).attr('id')]);
       });
     }
   });

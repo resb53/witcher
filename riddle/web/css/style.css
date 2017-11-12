@@ -6,7 +6,7 @@ body {
 }
 h1 {
   color: rgba(255, 255, 128, 1);
-  font-style: bold;
+  font-weight: bold;
   text-align: center;
   font-size: 32px;
 }
@@ -45,13 +45,14 @@ img {
   border: 3px solid #333333;
   height: 400px;
   width: 740px;
-  font-size: 18px;
 }
 .tabspan {
   position: absolute;
   top: 42px;
   left: 5%;
   right: 5%;
+  font-size: 26px;
+  font-weight: bold;
 }
 .closeicon {
   position: absolute;
