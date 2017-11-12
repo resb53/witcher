@@ -12,6 +12,16 @@ app = Flask(__name__)
 def index():
   return render_template('./index.html')
 
+@app.route("/query", methods = ['POST'])
+def process_query():
+  data = request.form
+  print(data, file=sys.stderr)
+  if 'command' in data:
+    response = { 'msg' : data['command'] + " received." }
+  else:
+    response = { 'msg' : "There seems to have been a problem. Please inform the DM." }
+  return json.dumps(response)
+
 @app.route("/js/<path:path>")
 def send_js(path):
   return send_from_directory('js', path)
