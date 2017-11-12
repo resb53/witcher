@@ -29,7 +29,7 @@ with open('riddle-text.json', 'r') as f:
   f.close()
 
 # Modify riddle
-def getRiddle(rstat):
+def getRiddle():
   riddle = plainriddle.copy()
 
   # Replace \n with <br>
@@ -77,7 +77,11 @@ def checkAnswer(riddle,answer):
   # Compare and report
   if answer == answers[riddle]['solution']:
     lstat = lstat | answers[riddle]['code']
-    return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(bin(lstat).count('0')) + " to go."
+    remain = 4 - bin(lstat).count('1')
+    if remain > 0:
+      return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(remain) + " to go."
+    else:
+      return "Congratulations! " + answer[0].upper() + answer[1:] + " is correct. You're done, feel free to leave, and good luck!"
   else:
     return "I'm sorry, " + answer + " is not the answer I'm looking for. Please try again."
 
@@ -86,25 +90,29 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-  return render_template('./index.html')
+  return render_template('./index.html', lstat=lstat)
 
 @app.route("/query", methods = ['POST'])
 def process_query():
   data = request.form
   print(data, file=sys.stderr)
   if 'riddle' in data and 'solution' in data:
-    response = { 'msg' : "Skeleton> " + checkAnswer(data['riddle'], data['solution']) }
+    response = { 'msg' : "Skeleton> " + checkAnswer(data['riddle'], data['solution']),
+                 'lstat' : lstat }
   else:
-    respose = {'msg' : "Skeleton> I'm sorry there seems to have been a problem. Please inform the DM."}
+    response = { 'msg' : "Skeleton> I'm sorry there seems to have been a problem. Please inform the DM.",
+                 'lstat' : lstat }
   return json.dumps(response)
 
 @app.route("/getriddle")
 def send_riddles():
-  args = request.args
-  if "r" in args:
-    return json.dumps(getRiddle(args['r']))
-  else:
-    return ("Invalid request", 400)
+  return json.dumps(getRiddle())
+
+@app.route("/reset")
+def reset():
+  global lstat
+  lstat = 0b0000
+  return ('Riddle Reset Successfully.', 200)
 
 @app.route("/js/<path:path>")
 def send_js(path):

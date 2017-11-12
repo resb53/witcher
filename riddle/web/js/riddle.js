@@ -1,6 +1,5 @@
 // Globals
 var curtab = ''
-var rstat = 0;
 
 // Code for initialising the view
 $(document).ready(function() {
@@ -27,12 +26,17 @@ $(document).ready(function() {
         dataType: 'json',
         data: dataform,
         success: function(data) {
+          // Display response
           update_log(data['msg']);
+          // Update visible tablets
+          hide_tabs(data['lstat']);
+          // Complete if finished
+          if ( (data['lstat'] & 15) == 15) $("#base").attr("src","img/Winner.png");
         }
       });
     }
     else {
-      update_log('Please have a tablet open before submitting a solution.');
+      update_log('Skeleton> Please have a tablet open before submitting a solution.');
     }
   });
 
@@ -49,8 +53,9 @@ $(document).ready(function() {
     }
   });
 
-  // Load text into tablets
-  load_riddles(rstat);
+  // Load text into tablets and show/hide solved tabs
+  load_riddles();
+  hide_tabs(lstat);
   
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
@@ -81,9 +86,9 @@ function update_log(newval) {
   }
 }
 
-function load_riddles(s) {
+function load_riddles() {
   $.ajax({
-    url: "getriddle?r=" + s,
+    url: "getriddle",
     type: 'get',
     dataType: 'json',
     success: function(data) {
@@ -93,4 +98,19 @@ function load_riddles(s) {
       });
     }
   });
+}
+
+function hide_tabs(lst) {
+  // Cyan
+  if ( (lst & 8) == 8 ) $('#cyan').hide();
+  else $('#cyan').show();
+  // Violet
+  if ( (lst & 4) == 4 ) $('#violet').hide();
+  else $('#violet').show();
+  // Purple
+  if ( (lst & 2) == 2 ) $('#purple').hide();
+  else $('#purple').show();
+  // Red
+  if ( (lst & 1) == 1 ) $('#red').hide();
+  else $('#red').show();
 }

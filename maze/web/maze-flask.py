@@ -200,7 +200,7 @@ def reset():
           "op": 1,
           "ex": 1 }
   
-  return ('Maze Reset Succesfully.', 200)
+  return ('Maze Reset Successfully.', 200)
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=int(31331))
