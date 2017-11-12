@@ -44,8 +44,8 @@ function update_log(newval) {
   new_text = newval;
   old_text = '';
   for (i=0; i<20; i++) {
-    old_text = $("#record_"+i).text();
-    $("#record_"+i).text(new_text);
+    old_text = $("#record_"+i).html();
+    $("#record_"+i).html(new_text);
     new_text = old_text;
   }
 }
