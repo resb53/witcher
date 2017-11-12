@@ -22,7 +22,6 @@ def getRiddle(rstat):
     riddle[key] = riddle[key].split("\n")
 
   # Cyan, plaintext
-  riddle['cyantext'] = "<br>".join(riddle['cyantext'])
 
   # Violet, reverse
   puncspace = re.compile('([\.\,\;\:\!\?]) ')
@@ -39,21 +38,19 @@ def getRiddle(rstat):
     # Capitalise new first
     riddle['violettext'][i] = s[:1].upper() + s[1:]
 
-  riddle['violettext'] = "<br>".join(riddle['violettext'])
-
   # red rot cipher
   enc = codecs.getencoder( "rot-13" )
   for i, s in enumerate(riddle['redtext']):
     riddle['redtext'][i] = enc( s )[0]
 
-  riddle['redtext'] = "<br>".join(riddle['redtext'])
-
   # purple tr map
   for i, s in enumerate(riddle['purpletext']):
     riddle['purpletext'][i] = s.translate(str.maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
                                                         'omktavgyezcjnbudxwfpirlshqOMKTAVGYEZCJNBUDXWFPIRLSHQ'))
-  
-  riddle['purpletext'] = "<br>".join(riddle['purpletext'])
+
+  # Format for web viewing
+  for key in riddle:
+    riddle[key] = "<br><br>".join(riddle[key])
 
   return riddle
 
