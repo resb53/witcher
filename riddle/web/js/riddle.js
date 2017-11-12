@@ -82,7 +82,15 @@ function update_log(newval) {
 }
 
 function load_riddles(s) {
-  $.get("getriddle?r=" + s, function(data) {
-    $("#cyantext").text(data["foo"]);
+  $.ajax({
+    url: "getriddle?r=" + s,
+    type: 'get',
+    dataType: 'json',
+    success: function(data) {
+      // Fill each tabspan with their content -- response keys are span ids
+      $(".tabspan").each( function() {
+        $(this).text(data[$(this).attr('id')]);
+      });
+    }
   });
 }

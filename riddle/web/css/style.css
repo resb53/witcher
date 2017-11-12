@@ -50,6 +50,8 @@ img {
 .tabspan {
   position: absolute;
   top: 42px;
+  left: 5%;
+  right: 5%;
 }
 .closeicon {
   position: absolute;

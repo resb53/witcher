@@ -6,6 +6,11 @@ import sys
 import json
 
 # App logic
+# Get the riddle text
+with open('riddle-text.json', 'r') as f:
+  riddle = json.load(f)
+  f.close()
+
 def checkAnswer(ans):
   return
 
@@ -27,8 +32,7 @@ def process_query():
 def send_riddles():
   args = request.args
   if "r" in args:
-    response = { 'foo': "Your riddle text here for " + args["r"] + "." }
-    return json.dumps(response)
+    return json.dumps(riddle)
   else:
     return ("Invalid request", 400)
 
