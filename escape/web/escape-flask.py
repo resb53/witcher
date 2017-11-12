@@ -9,7 +9,13 @@ import json
 commands = { '?': 'Shows the help text for a command.',
              'look': 'Looks around the area, listing objects of interest.',
              'use': 'Uses or interacts with an object that can be seen.',
-             'back': 'Backs away form an object to take a wider look.' }
+             'take': 'Attempt to take an item and collect it in your inventory.',
+             'inv': 'Focus on your inventory insteam of the room.',
+             'back': 'Backs away from an object or your inventory to take a wider look.' }
+
+# Something about current level, to vary between looking around the room and in more detail. A counter?
+# A global to hold the current item of focus? Use 'room' for this and as the base root?
+# OOP. ish. Have a load of JSON object wiht parameters that affect how the base commands handle them.
 
 # Execute a valid command (checked in process_query)
 def doCommand(com):
@@ -30,6 +36,12 @@ def doCommand(com):
     ret['msg'] = 'You look around.'
   elif com[0] == 'use':
     ret['msg'] = 'You use an object.'
+  elif com[0] == 'take':
+    ret['msg'] = 'You take an object.'
+  elif com[0] == 'inv':
+    ret['msg'] = 'You inspect your inventory.'
+  elif com[0] == 'back':
+    ret['msg'] = 'You back away from the object.'
   return ret
 
 # Create webapp
