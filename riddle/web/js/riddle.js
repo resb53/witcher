@@ -3,7 +3,13 @@ var curtab = ''
 
 // Code for initialising the view
 $(document).ready(function() {
-  $("#base").attr("src","img/Riddler.png");
+  // Check if already complete, load background if not
+  if ( ( lstat & 15 ) != 15 ) $("#base").attr("src","img/Riddler.png");
+  else {
+    $("#base").attr("src","img/Winner.png");
+    $("#record_0").text("You're done, feel free to leave, and good luck!");
+    $("#record_1").text('');
+  }
 
   // Prepare action when text submitted
   $("#query").on("submit", function(e) {
