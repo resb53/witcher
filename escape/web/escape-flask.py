@@ -22,6 +22,8 @@ def doCommand(com):
     elif len(com) == 2:
       if com[1] in commands:
         ret['msg'] = com[1] + ': ' + commands[com[1]]
+      else:
+        ret['msg'] = 'Error: command not recognised. Use ? to list available commands, and ? followed by a command for more info.'
     else:
       ret['msg'] = 'Too many arguments. ? can only be used with up to one additional command.'
   elif com[0] == 'look':
