@@ -77,7 +77,7 @@ def checkAnswer(riddle,answer):
   # Compare and report
   if answer == answers[riddle]['solution']:
     lstat = lstat | answers[riddle]['code']
-    return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(lstat) + " to go."
+    return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(bin(lstat).count('0')) + " to go."
   else:
     return "I'm sorry, " + answer + " is not the answer I'm looking for. Please try again."
 
