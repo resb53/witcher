@@ -8,10 +8,16 @@ import re
 import codecs
 
 # App logic
-answers = { '#cyantab': 'fire',
-            '#violettab': 'banana',
-            '#purpletab': 'salt',
-            '#redtab': 'bridge' }
+answers = { '#cyantab':   { 'solution': 'fire',
+                            'code': 0b1000 },
+            '#violettab': { 'solution': 'banana',
+                            'code': 0b0100 },
+            '#purpletab': { 'solution': 'salt',
+                            'code': 0b0010 }, 
+            '#redtab':    { 'solution': 'bridge',
+                            'code': 0b0001 } }
+lstat = 0b0000
+rstat = 0b0000
 
 # Regex
 puncspace = re.compile('([\.\,\;\:\!\?]) ')
@@ -63,13 +69,17 @@ def getRiddle(rstat):
 
 # Check answers
 def checkAnswer(riddle,answer):
+  global lstat
   # Compare lower case responses
   answer = answer.lower()
   # Remove articles if used
   answer = re.sub(articles, '', answer)
   # Compare and report
-
-  return "Comparing '" + answer + "' with '" + answers[riddle] + "' for " + riddle
+  if answer == answers[riddle]['solution']:
+    lstat = lstat | answers[riddle]['code']
+    return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(lstat) + " to go."
+  else:
+    return "I'm sorry, " + answer + " is not the answer I'm looking for. Please try again."
 
 # Create webapp
 app = Flask(__name__)
