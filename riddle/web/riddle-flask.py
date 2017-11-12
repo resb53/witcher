@@ -8,6 +8,15 @@ import re
 import codecs
 
 # App logic
+answers = { '#cyantab': 'fire',
+            '#violettab': 'banana',
+            '#purpletab': 'salt',
+            '#redtab': 'bridge' }
+
+# Regex
+puncspace = re.compile('([\.\,\;\:\!\?]) ')
+articles = re.compile('^(the|an?) ')
+
 # Get the riddle text
 with open('riddle-text.json', 'r') as f:
   plainriddle = json.load(f)
@@ -24,8 +33,6 @@ def getRiddle(rstat):
   # Cyan, plaintext
 
   # Violet, reverse
-  puncspace = re.compile('([\.\,\;\:\!\?]) ')
-
   for i, s in enumerate(riddle['violettext']):
     # Decapitalise first
     s = s[:1].lower() + s[1:]
@@ -55,8 +62,14 @@ def getRiddle(rstat):
   return riddle
 
 # Check answers
-def checkAnswer(ans):
-  return
+def checkAnswer(riddle,answer):
+  # Compare lower case responses
+  answer = answer.lower()
+  # Remove articles if used
+  answer = re.sub(articles, '', answer)
+  # Compare and report
+
+  return "Comparing '" + answer + "' with '" + answers[riddle] + "' for " + riddle
 
 # Create webapp
 app = Flask(__name__)
@@ -69,7 +82,10 @@ def index():
 def process_query():
   data = request.form
   print(data, file=sys.stderr)
-  response = { 'msg' : 'Received: ' + data['solution'] }
+  if 'riddle' in data and 'solution' in data:
+    response = { 'msg' : "Skeleton> " + checkAnswer(data['riddle'], data['solution']) }
+  else:
+    respose = {'msg' : "Skeleton> I'm sorry there seems to have been a problem. Please inform the DM."}
   return json.dumps(response)
 
 @app.route("/getriddle")

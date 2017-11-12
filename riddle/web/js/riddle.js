@@ -11,7 +11,7 @@ $(document).ready(function() {
     e.preventDefault();
     // Prepare to loop through output lines, updating them
     solsubmit = $("#solution").val();
-    update_log('> ' + solsubmit);
+    update_log('You> ' + solsubmit);
     // Reset input field
     $("#solution").val('');
     // Prepare form
