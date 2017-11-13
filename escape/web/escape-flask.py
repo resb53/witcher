@@ -8,7 +8,7 @@ import json
 # App logic
 commands = { '?': 'Shows the help text for a command.',
              'look': 'Looks around the area, listing objects of interest.',
-             'use': 'Uses or interacts with an object that can be seen.',
+             'use': 'Uses or interacts with the current focused object, or shifts focus to a new specified object that can be seen.',
              'take': 'Attempt to take an item and collect it in your inventory.',
              'inv': 'Focus on your inventory insteam of the room.',
              'back': 'Backs away from an object or your inventory to take a wider look.' }
@@ -16,13 +16,22 @@ commands = { '?': 'Shows the help text for a command.',
 # Something about current level, to vary between looking around the room and in more detail. A counter?
 # A global to hold the current item of focus? Use 'room' for this and as the base root?
 # OOP. ish. Have a load of JSON object wiht parameters that affect how the base commands handle them.
+level = 'room'
+
+# Get the riddle text
+with open('escape-room.json', 'r') as f:
+  theroom = json.load(f)
+  f.close()
 
 # Execute a valid command (checked in process_query)
 def doCommand(com):
+  global level, theroom
   ret = { 'msg': 'default response' }
   # Process per command
-  # List available commands
-  if com[0] == '?':
+  # List available commands with a general error check first
+  if level not in theroom:
+    ret['msg'] = 'Error: ' + level + ' is missing from theroom. Inform the DM.'
+  elif com[0] == '?':
     if len(com) == 1:
       ret['msg'] = ' &emsp; '.join(commands.keys())
     elif len(com) == 2:
@@ -32,16 +41,66 @@ def doCommand(com):
         ret['msg'] = 'Error: command not recognised. Use ? to list available commands, and ? followed by a command for more info.'
     else:
       ret['msg'] = 'Too many arguments. ? can only be used with up to one additional command.'
+  # Look at the current level. No additional commands.
   elif com[0] == 'look':
-    ret['msg'] = 'You look around.'
+    if len(com) == 1:
+      ret['msg'] = theroom[level]['description'] + ' ' + ', '.join(theroom[level]['children'])
+    else:
+      ret['msg'] = 'Error: You cannot look at an item. Use it first to approach and then look.'
+  # Use the current level. Or a specified item within.
   elif com[0] == 'use':
-    ret['msg'] = 'You use an object.'
+    if len(com) == 1:
+      if theroom[level]['onuse']:
+        ret['msg'] = theroom[level]['onuse']['description']
+        if 'next' in theroom[level]['onuse']:
+          # add the new item to the parents index, and remove the current
+          theroom[theroom[level]['parent']]['children'].extend(theroom[level]['onuse']['next'])
+          theroom[theroom[level]['parent']]['children'].remove(level)
+          # Focus on the new item
+          level = theroom[level]['onuse']['next']
+      else:
+        ret['msg'] = 'You do not know what to do with the ' + level + '.'
+    # Approach an object that can be seen
+    elif len(com) == 2:
+      if com[1] in theroom[level]['children']:
+        ret['msg'] = 'You focus on the ' + com[1] + '.'
+        if com[1] in theroom:
+          level = com[1]
+        else:
+          ret['msg'] = 'Error: This item is visible, but missing from theroom. Inform the DM.'
+      else:
+        ret['msg'] = 'You cannot see a ' + com[1] + '.'
+    else:
+      ret['msg'] = 'Error: You can attempt to use the current item, or an item within it, specifying the item second. You cannot use more than one at once.'
+  # Take the current level.
   elif com[0] == 'take':
-    ret['msg'] = 'You take an object.'
+    if len(com) == 1:
+      if level == 'inv':
+        ret['msg'] = 'You\'ve already gathered everything in your inventory.'
+      elif theroom[level]['size'] == 'small':
+        ret['msg'] = 'You take the ' + level + ' and place it in your inventory.'
+      else:
+        ret['msg'] = 'You are unable to take the ' + level + '. It is too ' + theroom[level]['size'] + '.'
+    else:
+       ret['msg'] = 'Error: You can only take the item currently being observed. Use it first to approach and then take.'
+  # Look at your inventory
   elif com[0] == 'inv':
-    ret['msg'] = 'You inspect your inventory.'
+    if len(com) == 1:
+      ret['msg'] = 'You inspect your inventory.'
+      theroom['inv']['parent'] = level
+      level = 'inv'
+    else:
+      ret['msg'] = 'Error: \'inv\' must be used as a single command.'
+  # Back away to the previous level
   elif com[0] == 'back':
-    ret['msg'] = 'You back away from the object.'
+    if len(com) == 1:
+      if 'parent' in theroom[level]:
+        ret['msg'] = 'You back away from the ' + level + '.'
+        level = theroom[level]['parent']
+      else:
+        ret['msg'] = 'You cannot back away any further.'
+    else:
+      ret['msg'] = 'Error: \'back\' must be used as a single command.'
   return ret
 
 # Create webapp

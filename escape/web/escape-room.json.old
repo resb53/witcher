@@ -1,0 +1,73 @@
+{
+  'inv': {
+    'children': [],
+    'size': 'inv',
+    'onuse': {},
+    'description': 'You look at the items you have gathered from the room. Currently you have:',
+    'img': 'Stash.png'
+  },
+  'room': {
+    'parent': '',
+    'children': [ 'bookcase', 'table', 'painting', 'bush', 'door', 'rug', 'chest' ],
+    'size': 'large',
+    'onuse': {},
+    'description': 'You are in a small cuboid room. The walls and floor are bare, cut stone. Within the room you see:',
+    'img': 'Room.png'
+  },
+  'bookcase': { 
+    'parent': 'room',
+    'children': [ 'red-book', 'cyan-book', 'purple-book', 'violet-book', 'dull-book', 'heavy-book', 'picture-frame' ],
+    'size': 'large',
+    'onuse': {},
+    'description': 'A large oak bookcase appears to be fastened to the wall. It is mostly barren apart from the following items:',
+    'img': 'Bookcase.png'
+  },
+  'table': {
+    'parent': 'room',
+    'children': [ 'black-book', 'drawer-one', 'drawer-two', 'drawer-three' ],
+    'size': 'large',
+    'onuse': {},
+    'description': 'A sturdy mahogany table is placed in the corner. Inspecting it you see the following items:',
+    'img': 'Table.png'
+  },
+  'painting': {
+    'parent': 'room',
+    'children': [],
+    'size': 'large',
+    'onuse': { 'description': 'You find the painting lifts away from the wall. You place it on the floor.', 'next': 'keyholes' },
+    'description': 'An old faded oil painting shows an artistic image of the cathedral above, in its former glory.',
+    'img': 'Painting.png'
+  },
+  'bush': {
+    'parent': 'room',
+    'children': [],
+    'size': 'large',
+    'onuse': { 'description': 'You find the plant and the soil lift away together in one clump. You put them to one side.', 'next': 'pot' },
+    'description': 'A busy plant sits in the corner. While it appears to be long dead, it is still thick with browned foliage.',
+    'img': 'Bush.png'
+  },
+  'door': {
+    'parent': 'room',
+    'children': [ 'handle', 'keyhole' ],
+    'size': 'large',
+    'onuse': {},
+    'description': 'A heavy door is set tightly into the wall. The hinges appear to be on the other side. You see the following features on the door:',
+    'img': 'Bookcase.png'
+  },
+  'rug': {
+    'parent': 'room',
+    'children': [],
+    'size': 'large',
+    'onuse': { 'description': 'With some effort you are able to roll the rug up revealing a cold stone floor beneath' },
+    'description': 'A heavy, vibrant rug lies on the floor in shades of 4 familiar colours.',
+    'img': 'Rug.png'
+  },
+  'chest': {
+    'parent': 'room',
+    'children': [ 'bronze-lock', 'silver-lock' ],
+    'size': 'large',
+    'onuse': { 'description': 'Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.', 'next': 'secret-drawer'},
+    'description': 'A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see:',
+    'img': 'Chest.png'
+  }
+}
