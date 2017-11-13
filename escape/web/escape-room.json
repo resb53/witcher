@@ -58,7 +58,7 @@
     "parent": "room",
     "children": [],
     "size": "large",
-    "onuse": { "description": "With some effort you are able to roll the rug up revealing a cold stone floor beneath" },
+    "onuse": { "description": "With some effort you are able to roll the rug up revealing a cold stone floor beneath. You replace the rug." },
     "description": "A heavy, vibrant rug lies on the floor in shades of 4 familiar colours.",
     "img": "Rug.png"
   },
@@ -69,5 +69,20 @@
     "onuse": { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": "secret-drawer"},
     "description": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see:",
     "img": "Chest.png"
+  },
+  "pot": {
+    "parent": "room",
+    "children": [ "brass-key-one" ],
+    "size": "large",
+    "onuse": {},
+    "description": "A musty teracotta pot remains where the bushy plant once stood. Within it you can see:",
+    "img": "Pot.png"
+  },
+  "brass-key-one": {
+    "parent": "pot",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." },
+    "description": "This is a dirty piece of brass. It appears to be half of a key, with a groove on the back where another half might attach."
   }
 }
