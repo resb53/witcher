@@ -34,7 +34,7 @@
     "parent": "room",
     "children": [],
     "size": "large",
-    "onuse": { "description": "You find the painting lifts away from the wall. You place it on the floor.", "next": "keyholes" },
+    "onuse": { "description": "You find the painting lifts away from the wall. You place it on the floor. Behind it are 3 keyholes.", "next": "keyholes" },
     "description": "An old faded oil painting shows an artistic image of the cathedral above, in its former glory.",
     "img": "Painting.png"
   },
