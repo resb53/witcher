@@ -23,15 +23,22 @@ with open('escape-room.json', 'r') as f:
   theroom = json.load(f)
   f.close()
 
+# Only allow changing the current level after checking it exists
+def setLevel(l):
+  global level
+  if l in theroom:
+    level = l
+    return 'You now focus on the ' + level + '.'
+  else:
+    return 'Error: ' + l + ' is missing from theroom. Inform the DM.'
+
 # Execute a valid command (checked in process_query)
 def doCommand(com):
-  global level, theroom
+  global theroom
   ret = { 'msg': 'default response' }
   # Process per command
-  # List available commands with a general error check first
-  if level not in theroom:
-    ret['msg'] = 'Error: ' + level + ' is missing from theroom. Inform the DM.'
-  elif com[0] == '?':
+  # List available commands
+  if com[0] == '?':
     if len(com) == 1:
       ret['msg'] = ' &emsp; '.join(commands.keys())
     elif len(com) == 2:
@@ -53,11 +60,16 @@ def doCommand(com):
       if theroom[level]['onuse']:
         ret['msg'] = theroom[level]['onuse']['description']
         if 'next' in theroom[level]['onuse']:
-          # add the new item to the parents index, and remove the current
-          theroom[theroom[level]['parent']]['children'].extend(theroom[level]['onuse']['next'])
-          theroom[theroom[level]['parent']]['children'].remove(level)
-          # Focus on the new item
-          level = theroom[level]['onuse']['next']
+          # See if we can focus on the new item
+          oldlevel = level
+          setmsg = setLevel(theroom[level]['onuse']['next'])
+          # If successful, add the new item to the parents index, and remove the old from its parent
+          if setmsg[:5] != 'Error':
+            ret['msg'] = ret['msg'] + ' ' + setmsg
+            theroom[theroom[oldlevel]['parent']]['children'].append(theroom[oldlevel]['onuse']['next'])
+            theroom[theroom[oldlevel]['parent']]['children'].remove(oldlevel)
+          else:
+            ret['msg'] = setmsg
       else:
         ret['msg'] = 'You do not know what to do with the ' + level + '.'
     # Approach an object that can be seen
@@ -65,7 +77,7 @@ def doCommand(com):
       if com[1] in theroom[level]['children']:
         ret['msg'] = 'You focus on the ' + com[1] + '.'
         if com[1] in theroom:
-          level = com[1]
+          ret['msg'] = setLevel(com[1])
         else:
           ret['msg'] = 'Error: This item is visible, but missing from theroom. Inform the DM.'
       else:
@@ -88,15 +100,14 @@ def doCommand(com):
     if len(com) == 1:
       ret['msg'] = 'You inspect your inventory.'
       theroom['inv']['parent'] = level
-      level = 'inv'
+      setLevel('inv')
     else:
       ret['msg'] = 'Error: \'inv\' must be used as a single command.'
   # Back away to the previous level
   elif com[0] == 'back':
     if len(com) == 1:
       if 'parent' in theroom[level]:
-        ret['msg'] = 'You back away from the ' + level + '.'
-        level = theroom[level]['parent']
+        ret['msg'] = 'You back away from the ' + level + '. ' + setLevel(theroom[level]['parent'])
       else:
         ret['msg'] = 'You cannot back away any further.'
     else:
