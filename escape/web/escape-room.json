@@ -52,7 +52,7 @@
     "size": "large",
     "onuse": {},
     "description": "A heavy door is set tightly into the wall. The hinges appear to be on the other side. You see the following features on the door:",
-    "img": "Bookcase.png"
+    "img": "Door.png"
   },
   "rug": {
     "parent": "room",
@@ -84,5 +84,165 @@
     "size": "small",
     "onuse": { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." },
     "description": "This is a dirty piece of brass. It appears to be half of a key, with a groove on the back where another half might attach."
+  },
+  "red-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "An old musty tome in a faded red cover. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "cyan-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "An old musty tome in a faded cyan cover. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "purple-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "An old musty tome in a faded purple cover. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "violet-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "An old musty tome in a faded violet cover. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "dull-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "An old musty tome in a faded buff cover. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "heavy-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "description": "A thick tome containing a great many pages. It appears to have once had a title, but it's long since worn away.",
+    "img": "Bookcase.png"
+  },
+  "picture-frame": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Taking the picture from the frame, you find nothing of interest, and replace the picture." },
+    "description": "A wooden frame containing a simple picture. It appears to be of the faceless statue you saw before approaching the coloured orbs.",
+    "img": "Bookcase.png"
+  },
+  "black-book": {
+    "parent": "table",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Opening the book you observe a series of dairy entries. But the count of the years makes no sense to you." },
+    "description": "A small black leather book, held closed by a string loop. It looks clean and fresh, but has no markings on the outside.",
+    "img": "Table.png"
+  },
+  "drawer-one": {
+    "parent": "table",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You slide the drawer out from the table. It is empty." },
+    "description": "A smaller wooden draw with a handle designed to be used to pull it from the table.",
+    "img": "Table.png"
+  },
+  "drawer-two": {
+    "parent": "table",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "The drawer won't budge. It appears to be locked." },
+    "description": "A wide wooden draw with a more elaborate handle and a small keyhole beneath.",
+    "img": "Table.png"
+  },
+  "drawer-three": {
+    "parent": "table",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You slide the drawer out from the table. It is empty." },
+    "description": "A smaller wooden draw with a chipped handle designed to be used to pull it from the table.",
+    "img": "Table.png"
+  },
+  "keyholes": {
+    "parent": "room",
+    "children": [ "violet-keyhole", "cyan-keyhole", "red-keyhole" ],
+    "size": "fixed",
+    "onuse": {},
+    "description": "A series of keyholes are set into the wall. Each has a coloured enamel setting. These are as follows:",
+    "img": "Keyholes.png"
+  },
+  "handle": {
+    "parent": "door",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "The handle turns easily, but the door won't budge. It appears to be locked." },
+    "description": "A round brass knob is attached to the door.",
+    "img": "Door.png"
+  },
+  "keyhole": {
+    "parent": "door",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You can only see blackness through the keyhole." },
+    "description": "A simple, but long keyhole sits in the thick wood of the door.",
+    "img": "Door.png"
+  },
+  "bronze-lock": {
+    "parent": "chest",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You need to combine a key with the keyhole to use it." },
+    "description": "A dull and plain brass lock, that is impressively sturdy.",
+    "img": "Chest.png"
+  },
+  "silver-lock": {
+    "parent": "chest",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You need to combine a key with the keyhole to use it." },
+    "description": "An elaborately decorated, silverish lock.",
+    "img": "Chest.png"
+  },
+  "secret-drawer": {
+    "parent": "chest",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You don't know what else to do with the drawer." },
+    "description": "A simple drawer in the same wood as the chest. Disappointingly it is empty.",
+    "img": "Chest.png"
+  },
+  "violet-keyhole": {
+    "parent": "keyholes",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You need to combine a key with the keyhole to use it." },
+    "description": "A keyhole surrounded by a violet enamel panel.",
+    "img": "Keyholes.png"
+  },
+  "cyan-keyhole": {
+    "parent": "keyholes",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You don't know what else to do with the drawer." },
+    "description": "A keyhole surrounded by a cyan enamel panel.",
+    "img": "Keyholes.png"
+  },
+  "red-keyhole": {
+    "parent": "keyholes",
+    "children": [],
+    "size": "fixed",
+    "onuse": { "description": "You don't know what else to do with the drawer." },
+    "description": "A keyhole surrounded by a red enamel panel.",
+    "img": "Keyholes.png"
   }
 }

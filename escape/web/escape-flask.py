@@ -63,11 +63,11 @@ def doCommand(com):
           # See if we can focus on the new item
           oldlevel = level
           setmsg = setLevel(theroom[level]['onuse']['next'])
-          # If successful, add the new item to the parents index, and remove the old from its parent
+          # If successful, add the new item to its parents index, and remove the on use effect from its parent
           if setmsg[:5] != 'Error':
             ret['msg'] = ret['msg'] + ' ' + setmsg
-            theroom[theroom[oldlevel]['parent']]['children'].append(theroom[oldlevel]['onuse']['next'])
-            theroom[theroom[oldlevel]['parent']]['children'].remove(oldlevel)
+            theroom[theroom[level]['parent']]['children'].append(level)
+            theroom[oldlevel]['onuse'] = {}
           else:
             ret['msg'] = setmsg
       else:
