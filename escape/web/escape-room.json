@@ -72,13 +72,13 @@
   },
   "pot": {
     "parent": "room",
-    "children": [ "brass-key-one" ],
+    "children": [ "brass-key-1" ],
     "size": "large",
     "onuse": {},
     "description": "A musty teracotta pot remains where the bushy plant once stood. Within it you can see:",
     "img": "Pot.png"
   },
-  "brass-key-one": {
+  "brass-key-1": {
     "parent": "pot",
     "children": [],
     "size": "small",
@@ -89,23 +89,23 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
-    "description": "An old musty tome in a faded red cover. It appears to have once had a title, but it's long since worn away.",
+    "onuse": { "description": "Opening the book you observe that it was written in 1253 by Vlad Ostrock, and appears to be a historical reference. A large number 6 has been written inside the front cover." },
+    "description": "A bright tome in a vibrant red leather backing. It is entitled 'Riverdell's Monarchs'.",
     "img": "Bookcase.png"
   },
   "cyan-book": {
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
-    "description": "An old musty tome in a faded cyan cover. It appears to have once had a title, but it's long since worn away.",
+    "onuse": { "description": "Opening the book you observe that it was written in 1231 by Arnold Hughes, and appears to be a philosophical essay. A large number 3 has been written inside the front cover." },
+    "description": "A light tome in a plain cyan cover. It is entitled 'The mystery of death'.",
     "img": "Bookcase.png"
   },
   "purple-book": {
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
+    "onuse": { "description": "Opening the book you observe that it was written in 1212 by Moira Adelade and appears to contain a variety of high brow cooking recipes." },
     "description": "An old musty tome in a faded purple cover. It appears to have once had a title, but it's long since worn away.",
     "img": "Bookcase.png"
   },
@@ -113,32 +113,47 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
-    "description": "An old musty tome in a faded violet cover. It appears to have once had a title, but it's long since worn away.",
+    "onuse": { "description": "Opening the book you observe that it was written in 1247 by Ellen DuFrain, and appears to be a travel guide with heavy Nilfgaardian influence. A large number 4 has been written inside the front cover." },
+    "description": "A worn tome with a mostly violet cover. It is entitled 'Guide to the Northern Kingdoms'.",
     "img": "Bookcase.png"
   },
   "dull-book": {
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
-    "description": "An old musty tome in a faded buff cover. It appears to have once had a title, but it's long since worn away.",
+    "onuse": { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone. A piece of paper with a grid and markings on it falls out of the book. You add it to your inventory.", "next": "grid-note" },
+    "description": "An old musty tome in a faded buff cover. It is entitled 'The mathematics of masonry'.",
     "img": "Bookcase.png"
+  },
+  "grid-note": {
+    "parent": "inv",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "Inspecting the grid and the markings... you realise it appears to be a specific arangement of stones in a wall with coordinates identifying a specific stone." },
+    "description": "A piece of paper with a grid and markings on it.",
+    "img": "Stash.png" 
   },
   "heavy-book": {
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe some faded but legible script in Common. It appears to be about star constellations." },
-    "description": "A thick tome containing a great many pages. It appears to have once had a title, but it's long since worn away.",
+    "onuse": { "description": "Opening the book you see that the centre of the pages have all be cut away to create a recess. Within it is half of a red key, which you remove and place in your inventory.", "next": "red-key-1" },
+    "description": "A thick tome containing a great many pages. It appears to have never had a title.",
     "img": "Bookcase.png"
+  },
+  "red-key-1": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." },
+    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing."
   },
   "picture-frame": {
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Taking the picture from the frame, you find nothing of interest, and replace the picture." },
-    "description": "A wooden frame containing a simple picture. It appears to be of the faceless statue you saw before approaching the coloured orbs.",
+    "onuse": { "description": "Taking the picture from the frame, you see a word written in an elegant hand: 'golden'. Noting this, you replace the picture." },
+    "description": "A wooden frame containing a picture of a faceless, female human. She is adorned by various precious tiaras, rings, earings and necklaces.",
     "img": "Bookcase.png"
   },
   "black-book": {
