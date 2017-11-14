@@ -105,8 +105,8 @@ def doCommand(com):
   elif com[0] == 'inv':
     if len(com) == 1:
       ret['msg'] = 'You inspect your inventory.'
-      theroom['inv']['parent'] = level
-      setLevel('inv')
+      theroom['inventory']['parent'] = level
+      setLevel('inventory')
     else:
       ret['msg'] = 'Error: \'inv\' must be used as a single command.'
   # Back away to the previous level
