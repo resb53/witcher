@@ -63,17 +63,17 @@ def doCommand(com):
   # Use the current level. Or a specified item within.
   elif com[0] == 'use':
     if len(com) == 1:
-      if theroom[level]['onuse']:
-        ret['msg'] = theroom[level]['onuse']['description']
-        if 'next' in theroom[level]['onuse']:
+      if len(theroom[level]['onuse']) > 0:
+        ret['msg'] = theroom[level]['onuse'][0]['description']
+        if 'next' in theroom[level]['onuse'][0]:
           # See if we can focus on the new item
           oldlevel = level
-          setmsg = setLevel(theroom[level]['onuse']['next'])
+          setmsg = setLevel(theroom[level]['onuse'][0]['next'])
           # If successful, add the new item to its parents index, and remove the on use effect from its parent
           if setmsg[:5] != 'Error':
             ret['msg'] = ret['msg'] + ' ' + setmsg
             theroom[theroom[level]['parent']]['children'].append(level)
-            theroom[oldlevel]['onuse'] = {}
+            theroom[oldlevel]['onuse'].pop(0)
           else:
             ret['msg'] = setmsg
       else:
