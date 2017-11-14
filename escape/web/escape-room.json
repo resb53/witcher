@@ -121,12 +121,12 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone. A piece of paper with a grid and markings on it falls out of the book. You add it to your inventory.", "next": "grid-note" },
+    "onuse": { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone. A piece of paper with a grid and markings on it rests within the book.", "next": "grid-note" },
     "description": "An old musty tome in a faded buff cover. It is entitled 'The mathematics of masonry'.",
     "img": "Bookcase.png"
   },
   "grid-note": {
-    "parent": "inventory",
+    "parent": "dull-book",
     "children": [],
     "size": "small",
     "onuse": { "description": "Inspecting the grid and the markings... you realise it appears to be a specific arangement of stones in a wall with coordinates identifying a specific stone." },
@@ -137,12 +137,12 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": { "description": "Opening the book you see that the centre of the pages have all be cut away to create a recess. Within it is half of a red key, which you remove and place in your inventory.", "next": "red-key-1" },
+    "onuse": { "description": "Opening the book you see that the centre of the pages have all be cut away to create a recess. Within it is half of a red key.", "next": "red-key-1" },
     "description": "A thick tome containing a great many pages. It appears to have never had a title.",
     "img": "Bookcase.png"
   },
   "red-key-1": {
-    "parent": "inventory",
+    "parent": "heavy-book",
     "children": [],
     "size": "small",
     "onuse": { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." },
