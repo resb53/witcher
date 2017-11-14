@@ -24,17 +24,17 @@
   },
   "table": {
     "parent": "room",
-    "children": [ "black-book", "drawer-one", "drawer-two", "drawer-three" ],
+    "children": [ "candelabra", "pyramid", "drawer-one", "drawer-two", "drawer-three" ],
     "size": "large",
     "onuse": [],
-    "description": "A sturdy mahogany table is placed in the corner.",
+    "description": "A sturdy mahogany table is placed in the corner. A candelabra sits on it, what little wax remains has run down from the stick holders. There is also a flawed glass pyramid that gently refracts the ambient light around it.",
     "img": "Table.png"
   },
   "painting": {
     "parent": "room",
     "children": [],
     "size": "large",
-    "onuse": [ { "description": "You find the painting lifts away from the wall. You place it on the floor. Behind it are 3 keyholes.", "next": "keyholes" }, { "description": "You don't know what else to do with the painting." } ],
+    "onuse": [ { "description": "You find the painting lifts away from the wall. You place it on the floor. Behind it are 3 keyholes.", "next": [ "keyholes" ] }, { "description": "You don't know what else to do with the painting." } ],
     "description": "An old faded oil painting shows an artistic image of the cathedral above, in its former glory.",
     "img": "Painting.png"
   },
@@ -42,7 +42,7 @@
     "parent": "room",
     "children": [],
     "size": "large",
-    "onuse": [ { "description": "You find the plant and the soil lift away together in one clump. You put them to one side.", "next": "pot" }, { "description": "You don't know what else to do with the bush." } ],
+    "onuse": [ { "description": "You find the plant and the soil lift away together in one clump. You put them to one side.", "next": [ "pot" ] }, { "description": "You don't know what else to do with the bush." } ],
     "description": "A bushy plant sits in the corner. While it appears to be long dead, it is still thick with browned foliage.",
     "img": "Bush.png"
   },
@@ -66,7 +66,7 @@
     "parent": "room",
     "children": [ "bronze-lock", "silver-lock" ],
     "size": "large",
-    "onuse": [ { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": "secret-drawer"}, { "description": "You don't know what else to do while the chest is locked." } ],
+    "onuse": [ { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": [ "secret-drawer" ] }, { "description": "You don't know what else to do while the chest is locked." } ],
     "description": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see.",
     "img": "Chest.png"
   },
@@ -121,7 +121,7 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone. A piece of paper with a grid and markings on it rests within the book.", "next": "grid-note" }, { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone." } ],
+    "onuse": [ { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone. A piece of paper with a grid and markings on it rests within the book.", "next": [ "grid-note" ] }, { "description": "Opening the book you observe a series of mathematical calculations about building structures from stone." } ],
     "description": "An old musty tome in a faded buff cover. It is entitled 'The mathematics of masonry'.",
     "img": "Bookcase.png"
   },
@@ -137,7 +137,7 @@
     "parent": "bookcase",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": "Opening the book you see that the centre of the pages have all be cut away to create a recess. Within it is half of a red key.", "next": "red-key-1" }, { "description": "There is no readable text inside the heavy book due to the recess." } ],
+    "onuse": [ { "description": "Opening the book you see that the centre of the pages have all be cut away to create a recess. Within it is half of a red key.", "next": [ "red-key-1" ] }, { "description": "There is no readable text inside the heavy book due to the recess." } ],
     "description": "A thick tome containing a great many pages. It appears to have never had a title.",
     "img": "Bookcase.png"
   },
@@ -156,19 +156,27 @@
     "description": "A wooden frame containing a picture of a faceless, female human. She is adorned by various precious tiaras, rings, earings and necklaces.",
     "img": "Bookcase.png"
   },
-  "black-book": {
+  "candelabra": {
+    "parent": "table",
+    "children": [],
+    "size": "fixed",
+    "onuse": [],
+    "description": "A matte brass candleabra is nailed to the table. Its 5 candlestick holders hold nothing more that a little old wax long since melted.",
+    "img": "Table.png"
+  },
+  "pyramid": {
     "parent": "table",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": "Opening the book you observe a series of dairy entries. But the count of the years makes no sense to you." } ],
-    "description": "A small black leather book, held closed by a string loop. It looks clean and fresh, but has no markings on the outside.",
+    "onuse": [ { "description": "As you move the pyramid, the gentle rainbow light emitted from its faces shifts against the wall." } ],
+    "description": "A smaller wooden draw with a handle designed to be used to pull it from the table.",
     "img": "Table.png"
   },
   "drawer-one": {
     "parent": "table",
     "children": [],
     "size": "fixed",
-    "onuse": [ { "description": "You slide the drawer out from the table. It is empty." } ],
+    "onuse": [ { "description": "You slide the drawer out from the table. Within it you see a small black, string-bound book, a slender letter opener, and a metallic lockbox.", "next": [ "black-book", "letter-opener", "lockbox" ] }, { "description": "The drawer opens and closes easily." } ],
     "description": "A smaller wooden draw with a handle designed to be used to pull it from the table.",
     "img": "Table.png"
   },
@@ -184,8 +192,32 @@
     "parent": "table",
     "children": [],
     "size": "fixed",
-    "onuse": [ { "description": "You slide the drawer out from the table. It is empty." } ],
+    "onuse": [ { "description": "Attempting to pull the drawer out, it seems to be firmly stuck. There seems to be a pressure point above the handle inside the drawer that is preventing it from moving." } ],
     "description": "A smaller wooden draw with a chipped handle designed to be used to pull it from the table.",
+    "img": "Table.png"
+  },
+  "black-book": {
+    "parent": "drawer-one",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "Opening the book you observe a long hand-written inventory list. It contains many item names alongside years." } ],
+    "description": "A small black leather book, held closed by a string loop. It looks clean and fresh, but has no markings on the outside.",
+    "img": "Table.png"
+  },
+  "letter-opener": {
+    "parent": "drawer-one",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You need to use this on another item using combine for it to have any use." } ],
+    "description": "A plain, dull blade. It is very slender, yet surprisingly sturdy for its size.",
+    "img": "Table.png"
+  },
+  "lockbox": {
+    "parent": "drawer-one",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "The box lid won't budge without the correct combination being entered using solve." } ],
+    "description": "A grey metallic box, it is inornate save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.",
     "img": "Table.png"
   },
   "keyholes": {

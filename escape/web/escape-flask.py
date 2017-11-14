@@ -66,16 +66,26 @@ def doCommand(com):
       if len(theroom[level]['onuse']) > 0:
         ret['msg'] = theroom[level]['onuse'][0]['description']
         if 'next' in theroom[level]['onuse'][0]:
-          # See if we can focus on the new item
-          oldlevel = level
-          setmsg = setLevel(theroom[level]['onuse'][0]['next'])
-          # If successful, add the new item to its parents index, and remove the on use effect from its parent
-          if setmsg[:5] != 'Error':
-            ret['msg'] = ret['msg'] + ' ' + setmsg
-            theroom[theroom[level]['parent']]['children'].append(level)
-            theroom[oldlevel]['onuse'].pop(0)
+          # If only one item, focus on it and handle it
+          if len(theroom[level]['onuse'][0]['next']) == 1:
+            # See if we can focus on the new item
+            oldlevel = level
+            setmsg = setLevel(theroom[level]['onuse'][0]['next'][0])
+            # If successful, add the new item to its parents index, and remove the onuse effect from its parent
+            if setmsg[:5] != 'Error':
+              ret['msg'] = ret['msg'] + ' ' + setmsg
+              theroom[theroom[level]['parent']]['children'].append(level)
+              theroom[oldlevel]['onuse'].pop(0)
+            else:
+              ret['msg'] = setmsg
+          # If more than one item, just return use description and add all items to their parents, removing this onuse effect.
           else:
-            ret['msg'] = setmsg
+            for item in theroom[level]['onuse'][0]['next']:
+              if item in theroom:
+                theroom[theroom[item]['parent']]['children'].append(item)
+                theroom[level]['onuse'].pop(0)
+              else:
+                ret['msg'] = ret['msg'] + ' Error: ' + item + ' is missing from theroom. Inform the DM.'
       else:
         ret['msg'] = 'You do not know what to do with the ' + level + '.'
     # Approach an object that can be seen
