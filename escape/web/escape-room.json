@@ -1,8 +1,8 @@
 {
-  "inv": {
+  "inventory": {
     "parent": "room",
     "children": [],
-    "size": "inv",
+    "size": "",
     "onuse": {},
     "description": "You look at the items you have gathered from the room. Currently you have:",
     "img": "Stash.png"
@@ -126,7 +126,7 @@
     "img": "Bookcase.png"
   },
   "grid-note": {
-    "parent": "inv",
+    "parent": "inventory",
     "children": [],
     "size": "small",
     "onuse": { "description": "Inspecting the grid and the markings... you realise it appears to be a specific arangement of stones in a wall with coordinates identifying a specific stone." },

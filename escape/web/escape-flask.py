@@ -87,14 +87,14 @@ def doCommand(com):
   # Take the current level.
   elif com[0] == 'take':
     if len(com) == 1:
-      if level == 'inv':
+      if level == 'inventory':
         ret['msg'] = 'You\'ve already gathered everything in your inventory.'
       elif theroom[level]['size'] == 'small':
         oldparent = theroom[level]['parent']
         # Remove the item from its parent and add it to the inventory
         theroom[oldparent]['children'].remove(level)
-        theroom['inv']['children'].append(level)
-        theroom[level]['parent'] = 'inv'
+        theroom['inventory']['children'].append(level)
+        theroom[level]['parent'] = 'inventory'
         # Return to the old parent
         ret['msg'] = 'You take the ' + level + ' and place it in your inventory. ' + setLevel(oldparent)
       else:
