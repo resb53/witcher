@@ -4,14 +4,14 @@
     "children": [],
     "size": "",
     "onuse": {},
-    "description": "You look at the items you have gathered from the room. Currently you have:",
+    "description": "You look at the items you have gathered from the room.",
     "img": "Stash.png"
   },
   "room": {
     "children": [ "bookcase", "table", "painting", "bush", "door", "rug", "chest" ],
     "size": "large",
     "onuse": {},
-    "description": "You are in a small 4-walled room. The walls and floor are bare, cut stone. Within the room you see:",
+    "description": "You are in a small 4-walled room. The walls and floor are bare, cut stone.",
     "img": "Room.png"
   },
   "bookcase": { 
@@ -19,7 +19,7 @@
     "children": [ "red-book", "cyan-book", "purple-book", "violet-book", "dull-book", "heavy-book", "picture-frame" ],
     "size": "large",
     "onuse": {},
-    "description": "A large oak bookcase appears to be fastened to the wall. It is mostly barren apart from the following items:",
+    "description": "A large oak bookcase appears to be fastened to the wall. It is mostly barren.",
     "img": "Bookcase.png"
   },
   "table": {
@@ -27,7 +27,7 @@
     "children": [ "black-book", "drawer-one", "drawer-two", "drawer-three" ],
     "size": "large",
     "onuse": {},
-    "description": "A sturdy mahogany table is placed in the corner. Inspecting it you see the following items:",
+    "description": "A sturdy mahogany table is placed in the corner.",
     "img": "Table.png"
   },
   "painting": {
@@ -51,7 +51,7 @@
     "children": [ "handle", "keyhole" ],
     "size": "large",
     "onuse": {},
-    "description": "A heavy door is set tightly into the wall. The hinges appear to be on the other side. You see the following features on the door:",
+    "description": "A heavy door is set tightly into the wall. The hinges appear to be on the other side.",
     "img": "Door.png"
   },
   "rug": {
@@ -67,7 +67,7 @@
     "children": [ "bronze-lock", "silver-lock" ],
     "size": "large",
     "onuse": { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": "secret-drawer"},
-    "description": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see:",
+    "description": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see.",
     "img": "Chest.png"
   },
   "pot": {
@@ -75,7 +75,7 @@
     "children": [ "brass-key-1" ],
     "size": "large",
     "onuse": {},
-    "description": "A musty teracotta pot remains where the bushy plant once stood. Within it you can see:",
+    "description": "A musty teracotta pot remains where the bushy plant once stood.",
     "img": "Pot.png"
   },
   "brass-key-1": {
@@ -193,7 +193,7 @@
     "children": [ "violet-keyhole", "cyan-keyhole", "red-keyhole" ],
     "size": "fixed",
     "onuse": {},
-    "description": "A series of keyholes are set into the wall. Each has a coloured enamel setting. These are as follows:",
+    "description": "A series of keyholes are set into the wall. Each has a coloured enamel setting.",
     "img": "Keyholes.png"
   },
   "handle": {

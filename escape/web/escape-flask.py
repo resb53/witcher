@@ -7,6 +7,7 @@ import json
 
 # App logic
 commands = { '?': 'Shows the help text for a command.',
+             'focus': 'Specifies what item you are currently focusing on.',
              'look': 'Looks around the area, listing objects of interest.',
              'use': 'Uses or interacts with the current focused object, or shifts focus to a new specified object that can be seen.',
              'take': 'Attempt to take an item and collect it in your inventory.',
@@ -48,10 +49,15 @@ def doCommand(com):
         ret['msg'] = 'Error: command not recognised. Use ? to list available commands, and ? followed by a command for more info.'
     else:
       ret['msg'] = 'Too many arguments. ? can only be used with up to one additional command.'
+  # Report the current focus level
+  elif com[0] == 'focus':
+    ret['msg'] = 'You currently focus on the ' + level + '.'
   # Look at the current level. No additional commands.
   elif com[0] == 'look':
     if len(com) == 1:
-      ret['msg'] = theroom[level]['description'] + ' ' + ', '.join(theroom[level]['children'])
+      ret['msg'] = theroom[level]['description']
+      if len(theroom[level]['children']) > 0:
+        ret['msg'] = ret['msg'] + ' It contains: ' + ', '.join(theroom[level]['children'])
     else:
       ret['msg'] = 'Error: You cannot look at an item. Use it first to approach and then look.'
   # Use the current level. Or a specified item within.
