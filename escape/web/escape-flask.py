@@ -81,7 +81,10 @@ def doCommand(com):
   elif com[0] == 'use':
     if len(com) == 1:
       if len(theroom[level]['onuse']) > 0:
-        ret['msg'] = theroom[level]['onuse'][0]['description']
+        if 'status' not in theroom[level]:
+          ret['msg'] = theroom[level]['onuse'][0]['description']
+        else:
+          ret['msg'] = theroom[level]['onuse'][0]['description'][theroom[level]['status']]
         if 'next' in theroom[level]['onuse'][0]:
           # If only one item, focus on it and handle it
           if len(theroom[level]['onuse'][0]['next']) == 1:

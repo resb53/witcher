@@ -219,7 +219,7 @@
     "parent": "drawer-one",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": "The box lid won't budge without the correct combination being entered using solve." } ],
+    "onuse": [ { "description": { "locked": "The box lid won't budge without the correct combination being entered using solve.", "unlocked": "The unlocked box opens and closes easily." } } ],
     "status": "locked",
     "description": { "locked": "A grey metallic box, it is undecorated save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.", "unlocked": "An unlocked grey metallic box, it is undecorated save for a picture of the cathedral's altar and a solved combination lock." },
     "solve": { "solution": "346", "description": "With a satisfying click, the lockbox pops open.", "update": { "status": "unlocked", "children": ["brass-key-2"] } },
