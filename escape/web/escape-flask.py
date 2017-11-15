@@ -14,7 +14,8 @@ commands = { '?': 'Shows the help text for a command.',
              'combine': 'Attempt to combine the item currently in focus with a named item in your inventory. Used alone will list your inventory.',
              'solve': 'Use with a solution word or number to solve the current focused item\'s puzzle.',
              'inv': 'Focus on your inventory insteam of the room.',
-             'back': 'Backs away from an object or your inventory to take a wider look.' }
+             'back': 'Backs away from an object or your inventory to take a wider look.',
+             'room': 'Take a step back to view the room as a whole' }
 
 # Something about current level, to vary between looking around the room and in more detail. A counter?
 # A global to hold the current item of focus? Use 'room' for this and as the base root?
@@ -200,6 +201,9 @@ def doCommand(com):
         ret['msg'] = 'You cannot back away any further.'
     else:
       ret['msg'] = 'Error: \'back\' must be used as a single command.'
+  # Back away to the room level
+  elif com[0] == 'room':
+    ret['msg'] = setLevel('room')
   return ret
 
 # Create webapp
