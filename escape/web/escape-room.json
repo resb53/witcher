@@ -35,6 +35,7 @@
     "children": [],
     "size": "large",
     "onuse": [ { "description": "You find the painting lifts away from the wall. You place it on the floor. Behind it are 3 keyholes.", "next": [ "keyholes" ] }, { "description": "You don't know what else to do with the painting." } ],
+    "combine": { "lockbox": { "description": "The picture of the altar on the box is a precise match for its representation in the painting." } },
     "description": "An old faded oil painting shows an artistic image of the cathedral above, in its former glory.",
     "img": "Painting.png"
   },
@@ -217,7 +218,7 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "The box lid won't budge without the correct combination being entered using solve." } ],
-    "description": "A grey metallic box, it is inornate save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.",
+    "description": "A grey metallic box, it is undecorated save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.",
     "img": "Table.png"
   },
   "keyholes": {

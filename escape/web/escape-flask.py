@@ -11,6 +11,7 @@ commands = { '?': 'Shows the help text for a command.',
              'look': 'Looks around the area, listing objects of interest.',
              'use': 'Uses or interacts with the current focused object, or shifts focus to a new specified object that can be seen.',
              'take': 'Attempt to take an item and collect it in your inventory.',
+             'combine': 'Attempt to combine the item currently in focus with a named item in your inventory. Used alone will list your inventory.',
              'inv': 'Focus on your inventory insteam of the room.',
              'back': 'Backs away from an object or your inventory to take a wider look.' }
 
@@ -83,9 +84,9 @@ def doCommand(com):
             for item in theroom[level]['onuse'][0]['next']:
               if item in theroom:
                 theroom[theroom[item]['parent']]['children'].append(item)
-                theroom[level]['onuse'].pop(0)
               else:
                 ret['msg'] = ret['msg'] + ' Error: ' + item + ' is missing from theroom. Inform the DM.'
+            theroom[level]['onuse'].pop(0)
       else:
         ret['msg'] = 'You do not know what to do with the ' + level + '.'
     # Approach an object that can be seen
@@ -117,6 +118,20 @@ def doCommand(com):
         ret['msg'] = 'You are unable to take the ' + level + '. It is too ' + theroom[level]['size'] + '.'
     else:
        ret['msg'] = 'Error: You can only take the item currently being observed. Use it first to approach and then take.'
+  # Combine an inventory item with the current focus.
+  elif com[0] == 'combine':
+    if len(com) == 1:
+      ret['msg'] = 'Inventory: ' + ', '.join(theroom['inventory']['children'])
+    if len(com) == 2:
+      # See if this is a valid item in the inventory
+      if com[1] in theroom['inventory']['children']:
+        # See if the current focus has a combination with this specified.
+        if 'combine' in theroom[level] and com[1] in theroom[level]['combine']:
+          ret['msg'] = theroom[level]['combine'][com[1]]['description']
+        else:
+          ret['msg'] = 'You don\'t know how to combine the ' + com[1] + ' with the ' + level + '.'
+      else:
+        ret['msg'] = 'Error: Cannot find the ' + com[1] + ' in your inventory.'
   # Look at your inventory
   elif com[0] == 'inv':
     if len(com) == 1:
