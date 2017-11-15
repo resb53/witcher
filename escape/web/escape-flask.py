@@ -35,6 +35,16 @@ def setLevel(l):
   else:
     return 'Error: ' + l + ' is missing from theroom. Inform the DM.'
 
+# Tidy up children if removed from theroom
+def cleanChildren(l):
+  # Check to see if children still exist
+  toremove = []
+  for child in theroom[l]['children']:
+    if child not in theroom:
+      toremove.append(child)
+  for child in toremove:
+    theroom[l]['children'].remove(child)
+
 # Execute a valid command (checked in process_query)
 def doCommand(com):
   global theroom
@@ -62,6 +72,7 @@ def doCommand(com):
         ret['msg'] = theroom[level]['description']
       else:
         ret['msg'] = theroom[level]['description'][theroom[level]['status']]
+      cleanChildren(level)
       if len(theroom[level]['children']) > 0:
         ret['msg'] = ret['msg'] + ' It contains: ' + ', '.join(theroom[level]['children'])
     else:
@@ -126,6 +137,7 @@ def doCommand(com):
   # Combine an inventory item with the current focus.
   elif com[0] == 'combine':
     if len(com) == 1:
+      cleanChildren('inventory')
       ret['msg'] = 'Inventory: ' + ', '.join(theroom['inventory']['children'])
     if len(com) == 2:
       # See if this is a valid item in the inventory
