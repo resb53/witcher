@@ -84,7 +84,9 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
-    "description": "This is a dirty piece of brass. It appears to be half of a key, with a groove on the back where another half might attach."
+    "combine": { "brass-key-2": { "description": "The 2 brass parts slot together neatly producing a single brass-key.", "next": "brass-key", "destroy": true } },
+    "description": "This is a dirty piece of brass. It appears to be half of a key, with a groove on the back where another half might attach.",
+    "img": "Pot.png"
   },
   "red-book": {
     "parent": "bookcase",
@@ -218,7 +220,26 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "The box lid won't budge without the correct combination being entered using solve." } ],
-    "description": "A grey metallic box, it is undecorated save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.",
+    "status": "locked",
+    "description": { "locked": "A grey metallic box, it is undecorated save for a picture of the cathedral's altar, but does have a 3-digit combination lock on the front.", "unlocked": "An unlocked grey metallic box, it is undecorated save for a picture of the cathedral's altar and a solved combination lock." },
+    "solve": { "solution": "346", "description": "With a satisfying click, the lockbox pops open.", "update": { "status": "unlocked", "children": ["brass-key-2"] } },
+    "img": "Table.png"
+  },
+  "brass-key-2": {
+    "parent": "lockbox",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a ridge to attach another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "brass-key-1": { "description": "The 2 brass parts slot together neatly producing a single brass-key.", "next": "brass-key", "destroy": true } },
+    "description": "This is a dirty piece of brass. It appears to be half of a key, with a ridge on the back which might slot into another part.",
+    "img": "Table.png"
+  },
+  "brass-key": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
+    "description": "This is a dirty, but complete brass key.",
     "img": "Table.png"
   },
   "keyholes": {

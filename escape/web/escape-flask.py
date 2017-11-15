@@ -12,6 +12,7 @@ commands = { '?': 'Shows the help text for a command.',
              'use': 'Uses or interacts with the current focused object, or shifts focus to a new specified object that can be seen.',
              'take': 'Attempt to take an item and collect it in your inventory.',
              'combine': 'Attempt to combine the item currently in focus with a named item in your inventory. Used alone will list your inventory.',
+             'solve': 'Use with a solution word or number to solve the current focused item\'s puzzle.',
              'inv': 'Focus on your inventory insteam of the room.',
              'back': 'Backs away from an object or your inventory to take a wider look.' }
 
@@ -56,7 +57,11 @@ def doCommand(com):
   # Look at the current level. No additional commands.
   elif com[0] == 'look':
     if len(com) == 1:
-      ret['msg'] = theroom[level]['description']
+      # Check if there are multiple states
+      if 'status' not in theroom[level]:
+        ret['msg'] = theroom[level]['description']
+      else:
+        ret['msg'] = theroom[level]['description'][theroom[level]['status']]
       if len(theroom[level]['children']) > 0:
         ret['msg'] = ret['msg'] + ' It contains: ' + ', '.join(theroom[level]['children'])
     else:
@@ -125,13 +130,44 @@ def doCommand(com):
     if len(com) == 2:
       # See if this is a valid item in the inventory
       if com[1] in theroom['inventory']['children']:
-        # See if the current focus has a combination with this specified.
+        # See if the current focus has a combination with this specified item.
         if 'combine' in theroom[level] and com[1] in theroom[level]['combine']:
           ret['msg'] = theroom[level]['combine'][com[1]]['description']
+          # See if anything else happens
+          if 'next' in theroom[level]['combine'][com[1]]:
+            # See if we can focus on the new item
+            oldlevel = level
+            setmsg = setLevel(theroom[level]['combine'][com[1]]['next'])
+            # If successful, add the new item to its parents index, and remove the onuse effect from its parent
+            if setmsg[:5] != 'Error':
+              ret['msg'] = ret['msg'] + ' ' + setmsg
+              theroom[theroom[level]['parent']]['children'].append(level)
+              # Delete previous items if that is intended
+              if theroom[oldlevel]['combine'][com[1]]['destroy']:
+                theroom.pop(oldlevel)
+                theroom.pop(com[1])
+            else:
+              ret['msg'] = setmsg
         else:
           ret['msg'] = 'You don\'t know how to combine the ' + com[1] + ' with the ' + level + '.'
       else:
         ret['msg'] = 'Error: Cannot find the ' + com[1] + ' in your inventory.'
+  # Attempt to solve a puzzle.
+  elif com[0] == 'solve':
+    if 'solve' in theroom[level]:
+      if len(com) == 2:
+        # Check the solution
+        if theroom[level]['solve']['solution'] == com[1]:
+          ret['msg'] = theroom[level]['solve']['description']
+          # Update the object to reflect changes
+          for key in theroom[level]['solve']['update'].keys():
+            theroom[level][key] = theroom[level]['solve']['update'][key]
+        else:
+          ret['msg'] = 'That solution doesn\'t seem to solve the puzzle.'
+      else:
+        ret['msg'] = 'Error: You must supply a single solution with this command.'
+    else:
+      ret['msg'] = 'You don\'t know how to solve the ' + level + '.'
   # Look at your inventory
   elif com[0] == 'inv':
     if len(com) == 1:
