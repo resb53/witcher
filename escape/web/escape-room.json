@@ -11,7 +11,16 @@
     "children": [ "bookcase", "table", "painting", "bush", "door", "rug", "chest" ],
     "size": "large",
     "onuse": [],
+    "combine": { "grid-note": { "description": "Comparing the grid-note to the room, you identify a maching patch of masonry. Following the coordinates leads you to a loose-stone.", "update": { "children": ["bookcase","table","painting","bush","door","rug","chest","loose-stone"] } } },
     "description": "You are in a small 4-walled room. The walls and floor are bare, cut stone.",
+    "img": "Room.png"
+  },
+  "loose-stone": {
+    "parent": "room",
+    "children": [],
+    "size": "useless",
+    "onuse": [ { "description": "You carefully pull the stone away revealing a hidden compartment. A small key lies resting within.", "next": [ "small-key" ] }, { "description": "There is no longer anything behind the loose-stone." } ],
+    "description": "A very non-descript stone identified by the grid-note. It wobbles slightly when touched.",
     "img": "Room.png"
   },
   "bookcase": { 
@@ -144,6 +153,14 @@
     "description": "A thick tome containing a great many pages. It appears to have never had a title.",
     "img": "Bookcase.png"
   },
+  "brown-book": {
+    "parent": "bookcase",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This book describes a range of wooden puzzles, how to make them, how they work and how they can be solved." } ],
+    "description": "A worn, brown leather tome. It is entitled 'Carpentry tricks of the South'.",
+    "img": "Bookcase.png"
+  },
   "red-key-1": {
     "parent": "heavy-book",
     "children": [],
@@ -189,6 +206,7 @@
     "size": "fixed",
     "onuse": [ { "description": { "locked": "The drawer won't budge. It appears to be locked.", "unlocked": "Now unlocked, the drawer can easily be opened and closed." } } ],
     "combine": { "small-key": { "description": "The small key fits neatly in the hole, and turns easily. There's a small click as the drawer is unlocked.", "update": { "status": "unlocked", "children": ["jewelry-box","dice-2"] } } },
+    "status": "locked",
     "description": { "locked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath.", "unlocked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath." },
     "img": "Table.png"
   },
@@ -201,6 +219,14 @@
     "status": "locked",
     "description": { "locked": "A smaller wooden draw with a chipped handle designed to be used to pull it from the table.", "unlocked": "A smaller wooden draw with a chipped handle designed to be used to pull it from the table." },
     "img": "Table.png"
+  },
+  "small-key": {
+    "parent": "loose-stone",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
+    "description": "This is a small iron key.",
+    "img": "Key.png"
   },
   "dice-2": {
     "parent": "drawer-two",
@@ -295,7 +321,7 @@
     "size": "small",
     "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
     "description": "This is a dirty, but complete brass key.",
-    "img": "Table.png"
+    "img": "Key.png"
   },
   "keyholes": {
     "parent": "room",
