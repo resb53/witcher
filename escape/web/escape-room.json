@@ -58,10 +58,12 @@
   },
   "door": {
     "parent": "room",
-    "children": [ "handle", "keyhole" ],
+    "children": [],
     "size": "large",
-    "onuse": [],
-    "description": "A heavy door is set tightly into the wall. The hinges appear to be on the other side.",
+    "onuse": [ { "description": { "locked": "Turning the handle refuses to open the door. It appears to be locked. Looking through the keyhole you see only darkness beyond.", "unlocked": "Now unlocked, the door can be opened and closed freely." } } ],
+    "combine": { "long-key": { "description": "The large key fits perfectly in the door, and turns easily. There's a satisfying thunk as the door is unlocked.", "update": { "status": "unlocked", "children": ["cupboard"] } } },
+    "status": "locked",
+    "description": { "locked": "A weighty wooden door is placed at the end of the room. It has a round brass handle, and a tall keyhole beneath it.", "unlocked": "A weighty wooden door is placed at the end of the room. Now unlocked, it opens and closes easily." },
     "img": "Door.png"
   },
   "rug": {
@@ -118,9 +120,9 @@
     "parent": "chest",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": { "locked": "You can see no obvious moving pieces or ways of opening this box.", "unlocked": "The pieces of this puzzle now move so easily for you that you wonder how it wasn't more obvious before." } ],
+    "onuse": [ { "description": { "locked": "You can see no obvious moving pieces or ways of opening this box.", "unlocked": "The pieces of this puzzle now move so easily for you that you wonder how it wasn't more obvious before." } } ],
     "combine": { "brown-book": { "description": "Comparing the box with the book, you eventually find a matching design. Gripping specific pieces of wood, and applying pressure just so... the panels slide, revealing a chamber within. You retrieve a portion of a cyan-key and place it in your inventory.", "next": "cyan-key-1", "destroy": false } },
-    "status": "locked"
+    "status": "locked",
     "description": { "locked": "A pristine wooden box, devoid of any symbols or decoration. A series or very tight grooves run around the wood in seemingly random, straight lines.", "unlocked": "A pristine wooden box, devoid of any symbols or decoration. With knowledge gleamed from the book you can open and unlock the puzzle with ease." },
     "img": "Chest.png"
   },
@@ -227,15 +229,6 @@
     "description": "A worn, brown leather tome. It is entitled 'Carpentry tricks of the South'.",
     "img": "Bookcase.png"
   },
-  "red-key-1": {
-    "parent": "heavy-book",
-    "children": [],
-    "size": "small",
-    "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
-    "combine": { "red-key-2": { "description": "The 2 red parts slot together neatly producing a single red-key.", "next": "red-key", "destroy": true } },
-    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing.",
-    "img": "Key.png"
-  },
   "picture-frame": {
     "parent": "bookcase",
     "children": [],
@@ -257,7 +250,7 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "As you move the pyramid, the gentle rainbow light emitted from its faces shifts against the wall." } ],
-    "description": "A smaller wooden draw with a handle designed to be used to pull it from the table.",
+    "description": "A crude glass pyramid that difracts light around itself.",
     "img": "Table.png"
   },
   "drawer-one": {
@@ -296,6 +289,15 @@
     "description": "This is a small iron key.",
     "img": "Key.png"
   },
+  "red-key-1": {
+    "parent": "heavy-book",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "red-key-2": { "description": "The 2 red parts slot together neatly producing a single red-key.", "next": "red-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
   "red-key-2": {
     "parent": "drawer-two",
     "children": [],
@@ -331,15 +333,6 @@
     "solve": { "solution": "golden", "description": "Rotating the letters into place, the word 'golden' pops the lid of the box open.", "update": { "status": "unlocked", "children": ["violet-key-1"] } },
     "img": "Table.png"
   },
-  "violet-key-1": {
-    "parent": "jewelry-box",
-    "children": [],
-    "size": "small",
-    "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
-    "combine": { "violet-key-2": { "description": "The 2 violet parts slot together neatly producing a single violet-key.", "next": "violet-key", "destroy": true } },
-    "description": "This is a shaped piece of violet enamel. It appears to be half of a key, with a groove on the back where another half might attach.",
-    "img": "Key.png"
-  },
   "playing-cards-1": {
     "parent": "drawer-three",
     "children": [],
@@ -369,7 +362,7 @@
     "parent": "drawer-one",
     "children": [],
     "size": "small",
-    "onuse": [ { "description": "Opening the book you observe a long hand-written inventory list. It contains many item names alongside years." } ],
+    "onuse": [ { "description": "Opening the book you observe a long hand-written inventory list. It contains many item names alongside index numbers: * 1230 candlesticks * 1231 music-box * 1232 watering-can * 1233 sugar-bowl * 1234 oil-lamp * 1235 bird-feeder * 1236 envelopes * 1237 lockbox * 1238 bread-bin * 1239 playing-cards * 1240 elephant-statue * 1241 small-barrel * 1242 smoker * 1243 pillow-cases * 1244 picture-frame * 1245 trowel * 1246 golden-vase * 1247 doll-house * 1248 garden-wire * 1249 string * 1250 gas-lamp *" } ],
     "description": "A small black leather book, held closed by a string loop. It looks clean and fresh, but has no markings on the outside.",
     "img": "Table.png"
   },
@@ -415,22 +408,6 @@
     "onuse": [],
     "description": "A series of keyholes are set into the wall. From left-to-right, each has a coloured enamel setting.",
     "img": "Keyholes.png"
-  },
-  "handle": {
-    "parent": "door",
-    "children": [],
-    "size": "fixed",
-    "onuse": [ { "description": "The handle turns easily, but the door won't budge. It appears to be locked." } ],
-    "description": "A round brass knob is attached to the door.",
-    "img": "Door.png"
-  },
-  "keyhole": {
-    "parent": "door",
-    "children": [],
-    "size": "fixed",
-    "onuse": [ { "description": "You can only see blackness through the keyhole." } ],
-    "description": "A simple, but long keyhole sits in the thick wood of the door.",
-    "img": "Door.png"
   },
   "secret-drawer": {
     "parent": "chest",
@@ -491,5 +468,111 @@
     "combine": { "red-key": { "description": "The red key slides easily into the hole. As you turn it there's a sonorous clunk as the key locks into place. The enamel around the key begins to glow softly.", "success": "The keyhole gently glows a red colour, the key locked in place." } },
     "description": "A keyhole surrounded by a red enamel panel.",
     "img": "Keyholes.png"
-  }
+  },
+  "cyan-key-1": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "cyan-key-2": { "description": "The 2 cyan parts slot together neatly producing a single cyan-key.", "next": "cyan-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright cyan compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
+  "cyan-key-2": {
+    "parent": "music-box",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a ridge that could attach to another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "cyan-key-1": { "description": "The 2 cyan parts slot together neatly producing a single cyan-key.", "next": "cyan-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright cyan compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
+  "cyan-key": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
+    "description": "This is a complete key made from a cyan compound.",
+    "img": "Key.png"
+  },
+  "violet-key-1": {
+    "parent": "jewelry-box",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "violet-key-2": { "description": "The 2 violet parts slot together neatly producing a single violet-key.", "next": "violet-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright violet compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
+  "violet-key-2": {
+    "parent": "doll-house",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a ridge that could attach to another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "violet-key-1": { "description": "The 2 violet parts slot together neatly producing a single violet-key.", "next": "violet-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright violet compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
+  "violet-key": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
+    "description": "This is a complete key made from a violet compound.",
+    "img": "Key.png"
+  },
+  "cupboard": {
+    "parent": "door",
+    "children": ["pan", "door-stop", "envelopes", "playing-cards", "bird-feeder", "oil-lamp", "hammer", "music-box", "sugar-bowl", "pillow-cases", "broom", "trowel", "doll-house", "golden-vase", "clock", "elephant-statue", "small-barrel", "hammer", "shoe", "bread-bin", "string", "towel", "small-figurine", "candlesticks", "plates", "garden-wire", "watering-can", "smoker"],
+    "size": "large",
+    "onuse": [],
+    "description": "A heavy door is set tightly into the wall. The hinges appear to be on the other side.",
+    "img": "Door.png"
+  },
+  "music-box": {
+    "parent": "cupboard",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": { "locked": "Looking closer at the box you see it is sealed shut, with 3 numbered dials underneath. Next to the dials is inscribed a red  + and a black - as well as a picture of a court jester.", "unlocked": "The unlocked music-box opens and closes easily, but sadly no music plays." } } ],
+    "status": "locked",
+    "description": { "locked": "A simple music-box.", "unlocked": "A simple music-box." },
+    "solve": { "solution": "615", "description": "With a satisfying click, the music-box pops open.", "update": { "status": "unlocked", "children": ["cyan-key-2"] } },
+    "img": "Cupboard.png"
+  },
+  "doll-house": {
+    "parent": "cupboard",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": { "locked": "Looking closer at the doll-house, you can see something locked inside. There are 3 numbered dials hidden behind a window, with a gambling dice-cup inscribed in the window panels.", "unlocked": "The unlocked doll-house can be easily opened and the rooms inspected within." } } ],
+    "status": "locked",
+    "description": { "locked": "A miniature doll-house.", "unlocked": "A miniature doll-house." },
+    "solve": { "solution": "462", "description": "With a satisfying click, the lockbox pops open.", "update": { "status": "unlocked", "children": ["violet-key-2"] } },
+    "img": "Cupboard.png"
+  },
+  "pan": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A rusty pan.", "img": "Cupboard.png"},
+  "door-stop": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A wooden door-stop.", "img": "Cupboard.png"},
+  "envelopes": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A stack of musty envelopes.", "img": "Cupboard.png"},
+  "playing-cards": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description":"There is no writing on these cards."}], "description": "The rest of the deck of playing cards.", "img": "Cupboard.png"},
+  "bird-feeder": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A wire bird-feeder.", "img": "Cupboard.png"},
+  "oil-lamp": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description":"It has no oil and appears to be un-usable"}], "description": "An old-fashioned oil-lamp.", "img": "Cupboard.png"},
+  "hammer": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A cheap hammer.", "img": "Cupboard.png"},
+  "sugar-bowl": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A plain porcelain sugar-bowl", "img": "Cupboard.png"},
+  "pillow-cases": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A bundle of pillow-cases.", "img": "Cupboard.png"},
+  "broom": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A wicker broom.", "img": "Cupboard.png"},
+  "trowel": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A typical garden trowel.", "img": "Cupboard.png"},
+  "golden-vase": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A cermaic vase painted gold.", "img": "Cupboard.png"},
+  "clock": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description":"It is making no sound or movement. It does not appear to have been operational for some time."}], "description": "An old clock.", "img": "Cupboard.png"},
+  "elephant-statue": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A clay statue of an elephant - unpainted.", "img": "Cupboard.png"},
+  "small-barrel": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description": "Sadly, it is empty."}], "description": "A small wooden barrel for containing liquids.", "img": "Cupboard.png"},
+  "hammer": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A typical hammer.", "img": "Cupboard.png"},
+  "shoe": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A single leather shoe.", "img": "Cupboard.png"},
+  "bread-bin": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description":"The flap opens and closes with a slight squeak."}], "description": "A wooden bread-bin.", "img": "Cupboard.png"},
+  "string": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A ball of string.", "img": "Cupboard.png"},
+  "towel": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A mouldy towel.", "img": "Cupboard.png"},
+  "small-figurine": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A small figurine of a dancing woman.", "img": "Cupboard.png"},
+  "candlesticks": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A bunch of wax candlesticks.", "img": "Cupboard.png"},
+  "plates": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A stack of porcelain plates.", "img": "Cupboard.png"},
+  "garden-wire": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A ball of garden-wire.", "img": "Cupboard.png"},
+  "watering-can": {"parent": "cupboard", "children": [], "size": "small", "onuse": [], "description": "A tin watering-can.", "img": "Cupboard.png"},
+  "smoker": {"parent": "cupboard", "children": [], "size": "small", "onuse": [{"description":"It appears to be empty"}], "description": "A smoking device used for bee-keeping.", "img": "Cupboard.png"}
 }
