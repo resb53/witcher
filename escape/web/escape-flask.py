@@ -33,8 +33,6 @@ def setLevel(l):
   if l in theroom:
     level = l
     return 'You now focus on the ' + level + '.'
-  else:
-    return 'Error: ' + l + ' is missing from theroom. Inform the DM.'
 
 # Tidy up children if removed from theroom
 def cleanChildren(l):
@@ -44,6 +42,7 @@ def cleanChildren(l):
     if child not in theroom:
       toremove.append(child)
   for child in toremove:
+    print(child + ' not found. Removing from theroom.', file=sys.stderr)
     theroom[l]['children'].remove(child)
 
 # Execute a valid command (checked in process_query)
@@ -104,8 +103,6 @@ def doCommand(com):
             for item in theroom[level]['onuse'][0]['next']:
               if item in theroom:
                 theroom[theroom[item]['parent']]['children'].append(item)
-              else:
-                ret['msg'] = ret['msg'] + ' Error: ' + item + ' is missing from theroom. Inform the DM.'
             theroom[level]['onuse'].pop(0)
       else:
         ret['msg'] = 'You do not know what to do with the ' + level + '.'
@@ -115,8 +112,6 @@ def doCommand(com):
         ret['msg'] = 'You focus on the ' + com[1] + '.'
         if com[1] in theroom:
           ret['msg'] = setLevel(com[1])
-        else:
-          ret['msg'] = 'Error: This item is visible, but missing from theroom. Inform the DM.'
       else:
         ret['msg'] = 'You cannot see a ' + com[1] + '.'
     else:
@@ -149,7 +144,7 @@ def doCommand(com):
         # See if the current focus has a combination with this specified item.
         if 'combine' in theroom[level] and com[1] in theroom[level]['combine']:
           ret['msg'] = theroom[level]['combine'][com[1]]['description']
-          # See if anything else happens
+          # See if a new item is created
           if 'next' in theroom[level]['combine'][com[1]]:
             # See if we can focus on the new item
             oldlevel = level
@@ -164,6 +159,10 @@ def doCommand(com):
                 theroom.pop(com[1])
             else:
               ret['msg'] = setmsg
+          # If not, see it any status is changed
+          elif 'update' in theroom[level]['combine'][com[1]]:
+            for key in theroom[level]['combine'][com[1]]['update'].keys():
+              theroom[level][key] = theroom[level]['combine'][com[1]]['update'][key]
         else:
           ret['msg'] = 'You don\'t know how to combine the ' + com[1] + ' with the ' + level + '.'
       else:
@@ -187,6 +186,8 @@ def doCommand(com):
   # Look at your inventory
   elif com[0] == 'inv':
     if len(com) == 1:
+      # Arrange the inventory's children when inspecting.
+      theroom['inventory']['children'].sort()
       ret['msg'] = 'You inspect your inventory.'
       theroom['inventory']['parent'] = level
       setLevel('inventory')
