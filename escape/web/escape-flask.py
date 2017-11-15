@@ -44,6 +44,24 @@ def cleanChildren(l):
   for child in toremove:
     print(child + ' not found. Removing from theroom.', file=sys.stderr)
     theroom[l]['children'].remove(child)
+  return
+
+# Reduce multilocks
+def decrementLock(l):
+  global theroom
+  lock = theroom[l]['status']
+  # If already unlocked, do nothing
+  if lock == 'unlocked':
+    return
+  # Check how locked it is (yes this is not very generic, but I'm only using it once in this room. Improve later for more general use)
+  else:
+    if lock[-2:] == 'x2':
+      theroom[l]['status'] = 'locked'
+    else:
+      theroom[l]['status'] = 'unlocked'
+      for key in theroom[l]['update'].keys():
+        theroom[l][key] = theroom[l]['update'][key]
+  return
 
 # Execute a valid command (checked in process_query)
 def doCommand(com):
@@ -81,7 +99,8 @@ def doCommand(com):
   elif com[0] == 'use':
     if len(com) == 1:
       if len(theroom[level]['onuse']) > 0:
-        if 'status' not in theroom[level]:
+        # Also check type incase use is independant of status
+        if 'status' not in theroom[level] or isinstance(theroom[level]['onuse'][0]['description'], str):
           ret['msg'] = theroom[level]['onuse'][0]['description']
         else:
           ret['msg'] = theroom[level]['onuse'][0]['description'][theroom[level]['status']]
@@ -153,16 +172,31 @@ def doCommand(com):
             if setmsg[:5] != 'Error':
               ret['msg'] = ret['msg'] + ' ' + setmsg
               theroom[theroom[level]['parent']]['children'].append(level)
-              # Delete previous items if that is intended
+              # Delete previous items if that is intended, otherwise prevent them from combining again and producing more items
               if theroom[oldlevel]['combine'][com[1]]['destroy']:
                 theroom.pop(oldlevel)
                 theroom.pop(com[1])
+              else:
+                theroom[oldlevel].pop('combine')
+                theroom[com[1]].pop('combine')
             else:
               ret['msg'] = setmsg
           # If not, see it any status is changed
           elif 'update' in theroom[level]['combine'][com[1]]:
             for key in theroom[level]['combine'][com[1]]['update'].keys():
-              theroom[level][key] = theroom[level]['combine'][com[1]]['update'][key]
+              if key != 'parent':
+                theroom[level][key] = theroom[level]['combine'][com[1]]['update'][key]
+              else:
+                decrementLock(theroom[level]['parent'])
+          # Carry out actions if a major keyhole has been completed
+          elif 'success' in theroom[level]['combine'][com[1]]:
+            # The key is now locked
+            theroom.pop(com[1])
+            # Update the description with the success message
+            theroom[level]['onuse'] = [ { 'description': theroom[level]['combine'][com[1]] } ]
+            theroom[level]['description'] = theroom[level]['combine'][com[1]]
+            # TELL THE SERVER
+            # foo
         else:
           ret['msg'] = 'You don\'t know how to combine the ' + com[1] + ' with the ' + level + '.'
       else:

@@ -25,7 +25,7 @@
   },
   "bookcase": { 
     "parent": "room",
-    "children": [ "red-book", "cyan-book", "purple-book", "violet-book", "dull-book", "heavy-book", "picture-frame" ],
+    "children": [ "red-book", "cyan-book", "purple-book", "violet-book", "dull-book", "brown-book", "heavy-book", "picture-frame" ],
     "size": "large",
     "onuse": [],
     "description": "A large oak bookcase appears to be fastened to the wall. It is mostly barren.",
@@ -74,10 +74,75 @@
   },
   "chest": {
     "parent": "room",
-    "children": [ "bronze-lock", "silver-lock" ],
+    "children": [ "brass-lock", "silver-lock" ],
     "size": "large",
-    "onuse": [ { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": [ "secret-drawer" ] }, { "description": "You don't know what else to do while the chest is locked." } ],
-    "description": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see.",
+    "onuse": [ { "description": "Pulling the chest away from the wall reveals a cold stone wall and floor. However, you notice a drawer on the bottom that opens backwards. You pull this out.", "next": [ "secret-drawer" ] }, { "description": { "lockedx2": "The lid won't budge. It appears to be locked.", "locked": "The lid still won't move with one clasp holding it shut.", "unlocked": "Now unlocked, the chest can easily be opened and closed." } } ],
+    "update": { "children": ["long-key","playing-cards-2","cigar-case","wooden-box"] },
+    "status": "lockedx2",
+    "description": { "lockedx2": "A large chest lies on the floor with thick metallic clasps binding it shut. Each of the 2 clasps has a lock that you can see.", "locked": "A large chest lies on the floor with thick metallic clasps binding it. One locked clasp still holds firm.", "unlocked": "A large chest lies on the floor with thick metallic clasps lying unlocked." },
+    "img": "Chest.png"
+  },
+  "long-key": {
+    "parent": "chest",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You need to find the right lock to use these key in." } ],
+    "description": "An old key with long prongs, suited to a larger lock.",
+    "img": "Chest.png"
+  },
+  "playing-cards-2": {
+    "parent": "chest",
+    "children": [],
+    "size": "small",
+    "onuse": [],
+    "description": "A set of three playing cards, which each has a large number drawn on the front. A red 3 displays a number 6. A black 6 displays a number 4. A red 9 displays a number 9.",
+    "img": "Chest.png"
+  },
+  "cigar-case": {
+    "parent": "chest",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You pop the case open easily and see a sheet of folded paper inside.", "next": "folded-paper" }, { "description": "The case pops open and snaps shut smoothly." } ],
+    "description": "An old key with long prongs, suited to a larger lock.",
+    "img": "Chest.png"
+  },
+  "folded-paper": {
+    "parent": "cigar-case",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "The list reads: * Bread * Milk * Oil * Cheese * Ham * Herring * Broccoli * Parsnips * Beer." } ],
+    "description": "An old folded piece of paper has a list of items scrawled on it in hasty handwriting.",
+    "img": "Chest.png"
+  },
+  "wooden-box": {
+    "parent": "chest",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": { "locked": "You can see no obvious moving pieces or ways of opening this box.", "unlocked": "The pieces of this puzzle now move so easily for you that you wonder how it wasn't more obvious before." } ],
+    "combine": { "brown-book": { "description": "Comparing the box with the book, you eventually find a matching design. Gripping specific pieces of wood, and applying pressure just so... the panels slide, revealing a chamber within. You retrieve a portion of a cyan-key and place it in your inventory.", "next": "cyan-key-1", "destroy": false } },
+    "status": "locked"
+    "description": { "locked": "A pristine wooden box, devoid of any symbols or decoration. A series or very tight grooves run around the wood in seemingly random, straight lines.", "unlocked": "A pristine wooden box, devoid of any symbols or decoration. With knowledge gleamed from the book you can open and unlock the puzzle with ease." },
+    "img": "Chest.png"
+  },
+  "brass-lock": {
+    "parent": "chest",
+    "children": [],
+    "size": "fixed",
+    "onuse": [ { "description": { "locked": "The lock holds firm. It appears a key is required.", "unlocked": "Now unlocked, the lock hangs limply from the chest" } } ],
+    "combine": { "brass-key": { "description": "The dull bronze key fits neatly in the hole, and turns easily. There's a small click as the clasp unlocks.", "update": { "status": "unlocked", "parent": true } } },
+    "status": "locked",
+    "description": { "locked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath.", "unlocked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath." },
+    "description": { "locked": "A dull and plain brass lock sits tightly locked.", "unlocked": "An unlocked brass lock hangs from the clasp." },
+    "img": "Chest.png"
+  },
+  "silver-lock": {
+    "parent": "chest",
+    "children": [],
+    "size": "fixed",
+    "onuse": [ { "description": { "locked": "The lock holds firm. It appears a key is required.", "unlocked": "Now unlocked, the lock hangs limply from the chest" } } ],
+    "combine": { "silver-key": { "description": "The silvery key fits neatly in the hole, and turns easily. There's a small click as the clasp unlocks.", "update": { "status": "unlocked", "parent": true } } },
+    "status": "locked",
+    "description": { "locked": "An elaborately decorated, silverish lock sits tightly locked.", "unlocked": "An unlocked silverish lock hangs from the clasp." },
     "img": "Chest.png"
   },
   "pot": {
@@ -158,6 +223,7 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "This book describes a range of wooden puzzles, how to make them, how they work and how they can be solved." } ],
+    "combine": { "wooden-box": { "description": "Comparing the box with the book, you eventually find a matching design. Gripping specific pieces of wood, and applying pressure just so... the panels slide, revealing a chamber within. You retrieve a portion of a cyan-key and place it in your inventory.", "next": "cyan-key-1", "destroy": false } },
     "description": "A worn, brown leather tome. It is entitled 'Carpentry tricks of the South'.",
     "img": "Bookcase.png"
   },
@@ -166,7 +232,9 @@
     "children": [],
     "size": "small",
     "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],
-    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing."
+    "combine": { "red-key-2": { "description": "The 2 red parts slot together neatly producing a single red-key.", "next": "red-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing.",
+    "img": "Key.png"
   },
   "picture-frame": {
     "parent": "bookcase",
@@ -205,7 +273,7 @@
     "children": [],
     "size": "fixed",
     "onuse": [ { "description": { "locked": "The drawer won't budge. It appears to be locked.", "unlocked": "Now unlocked, the drawer can easily be opened and closed." } } ],
-    "combine": { "small-key": { "description": "The small key fits neatly in the hole, and turns easily. There's a small click as the drawer is unlocked.", "update": { "status": "unlocked", "children": ["jewelry-box","dice-2"] } } },
+    "combine": { "small-key": { "description": "The small key fits neatly in the hole, and turns easily. There's a small click as the drawer is unlocked.", "update": { "status": "unlocked", "children": ["jewelry-box","dice-2","red-key-2"] } } },
     "status": "locked",
     "description": { "locked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath.", "unlocked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath." },
     "img": "Table.png"
@@ -226,6 +294,23 @@
     "size": "small",
     "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
     "description": "This is a small iron key.",
+    "img": "Key.png"
+  },
+  "red-key-2": {
+    "parent": "drawer-two",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "This is only half a key, with a ridge that could attach to another half. You'll need to combine the two for it to be useful." } ],
+    "combine": { "red-key-1": { "description": "The 2 red parts slot together neatly producing a single red-key.", "next": "red-key", "destroy": true } },
+    "description": "A portion of a key made out of a bright red compound. It looks like a piece is missing.",
+    "img": "Key.png"
+  },
+  "red-key": {
+    "parent": "inventory",
+    "children": [],
+    "size": "small",
+    "onuse": [ { "description": "You will need to combine this item with the correct keyhole for it to be of use." } ],
+    "description": "This is a complete key made from a red compound.",
     "img": "Key.png"
   },
   "dice-2": {
@@ -347,22 +432,6 @@
     "description": "A simple, but long keyhole sits in the thick wood of the door.",
     "img": "Door.png"
   },
-  "bronze-lock": {
-    "parent": "chest",
-    "children": [],
-    "size": "fixed",
-    "onuse": [ { "description": "You need to combine a key with the keyhole to use it." } ],
-    "description": "A dull and plain brass lock, that is impressively sturdy.",
-    "img": "Chest.png"
-  },
-  "silver-lock": {
-    "parent": "chest",
-    "children": [],
-    "size": "fixed",
-    "onuse": [ { "description": "You need to combine a key with the keyhole to use it." } ],
-    "description": "An elaborately decorated, silverish lock.",
-    "img": "Chest.png"
-  },
   "secret-drawer": {
     "parent": "chest",
     "children": [ "playing-cards-3", "dice-1" ],
@@ -401,6 +470,7 @@
     "children": [],
     "size": "fixed",
     "onuse": [ { "description": "You need to combine a key with the keyhole to use it." } ],
+    "combine": { "violet-key": { "description": "The violet key slides easily into the hole. As you turn it there's a sonorous clunk as the key locks into place. The enamel around the key begins to glow softly.", "success": "The keyhole gently glows a violet colour, the key locked in place." } },
     "description": "A keyhole surrounded by a violet enamel panel.",
     "img": "Keyholes.png"
   },
@@ -408,7 +478,8 @@
     "parent": "keyholes",
     "children": [],
     "size": "fixed",
-    "onuse": [ { "description": "You don't know what else to do with the drawer." } ],
+    "onuse": [ { "description": "You need to combine a key with the keyhole to use it." } ],
+    "combine": { "cyan-key": { "description": "The cyan key slides easily into the hole. As you turn it there's a sonorous clunk as the key locks into place. The enamel around the key begins to glow softly.", "success": "The keyhole gently glows a cyan colour, the key locked in place." } },
     "description": "A keyhole surrounded by a cyan enamel panel.",
     "img": "Keyholes.png"
   },
@@ -416,7 +487,8 @@
     "parent": "keyholes",
     "children": [],
     "size": "fixed",
-    "onuse": [ { "description": "You don't know what else to do with the drawer." } ],
+    "onuse": [ { "description": "You need to combine a key with the keyhole to use it." } ],
+    "combine": { "red-key": { "description": "The red key slides easily into the hole. As you turn it there's a sonorous clunk as the key locks into place. The enamel around the key begins to glow softly.", "success": "The keyhole gently glows a red colour, the key locked in place." } },
     "description": "A keyhole surrounded by a red enamel panel.",
     "img": "Keyholes.png"
   }
