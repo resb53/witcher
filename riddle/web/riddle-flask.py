@@ -40,27 +40,30 @@ def getRiddle():
   # Cyan, plaintext
 
   # Violet, reverse
-  for i, s in enumerate(riddle['violettext']):
-    # Decapitalise first
-    s = s[:1].lower() + s[1:]
-    # Move punc to the beginning
-    s = s[-1:] + s[:-1]
-    # Swap punc with spaces
-    s = re.sub(puncspace, ' \g<1>', s)
-    # Reverse the string
-    s = s[::-1]
-    # Capitalise new first
-    riddle['violettext'][i] = s[:1].upper() + s[1:]
+  if rstat & 4 == 4:
+    for i, s in enumerate(riddle['violettext']):
+      # Decapitalise first
+      s = s[:1].lower() + s[1:]
+      # Move punc to the beginning
+      s = s[-1:] + s[:-1]
+      # Swap punc with spaces
+      s = re.sub(puncspace, ' \g<1>', s)
+      # Reverse the string
+      s = s[::-1]
+      # Capitalise new first
+      riddle['violettext'][i] = s[:1].upper() + s[1:]
 
   # red rot cipher
-  enc = codecs.getencoder( "rot-13" )
-  for i, s in enumerate(riddle['redtext']):
-    riddle['redtext'][i] = enc( s )[0]
+  if rstat & 1 == 1:
+    enc = codecs.getencoder( "rot-13" )
+    for i, s in enumerate(riddle['redtext']):
+      riddle['redtext'][i] = enc( s )[0]
 
   # purple tr map
-  for i, s in enumerate(riddle['purpletext']):
-    riddle['purpletext'][i] = s.translate(str.maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-                                                        'omktavgyezcjnbudxwfpirlshqOMKTAVGYEZCJNBUDXWFPIRLSHQ'))
+  if rstat & 2 == 2:
+    for i, s in enumerate(riddle['purpletext']):
+      riddle['purpletext'][i] = s.translate(str.maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                                                          'omktavgyezcjnbudxwfpirlshqOMKTAVGYEZCJNBUDXWFPIRLSHQ'))
 
   # Format for web viewing
   for key in riddle:
@@ -77,7 +80,7 @@ def checkAnswer(riddle,answer):
   answer = re.sub(articles, '', answer)
   # Compare and report
   if answer == answers[riddle]['solution']:
-    lstat = lstat | answers[riddle]['code']
+    lstat |= answers[riddle]['code']
     remain = 4 - bin(lstat).count('1')
     if remain > 0:
       return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(remain) + " to go."
@@ -107,13 +110,25 @@ def process_query():
 
 @app.route("/getriddle")
 def send_riddles():
-  return json.dumps(getRiddle())
+  ret = getRiddle()
+  ret['rstat'] = rstat
+  return json.dumps(ret)
 
 @app.route("/reset")
 def reset():
   global lstat
   lstat = 0b0000
   return ('Riddle Reset Successfully.', 200)
+
+@app.route("/rstat", methods = ['POST'])
+def updateStat():
+  global rstat
+  data = request.form
+  if 'rstat' in data:
+    rstat |= data['rstat']
+    return ('rstat successful', 200)
+  else:
+    return ('rstat form corrupted.', 400)
 
 @app.route("/js/<path:path>")
 def send_js(path):

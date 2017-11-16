@@ -206,5 +206,15 @@ def reset():
   
   return ('Maze Reset Successfully.', 200)
 
+@app.route("/rstat", methods = ['POST'])
+def updateStat():
+  global rstat
+  data = request.form
+  if 'rstat' in data:
+    rstat |= data['rstat']
+    return ('rstat successful', 200)
+  else:
+    return ('rstat form corrupted.', 400)
+
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=int(31331))

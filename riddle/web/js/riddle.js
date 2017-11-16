@@ -59,9 +59,18 @@ $(document).ready(function() {
     }
   });
 
-  // Load text into tablets and show/hide solved tabs
-  load_riddles();
-  hide_tabs(lstat);
+  // Load text into tablets and show/hide solved tabs. Check for updates every 15 seconds
+  rstat = 0;
+  setInterval(function() {
+    ret = load_riddles();
+    if (ret) {
+      if (rstat != ret) {
+        rstat = ret;
+        update_log('The runes on the tablets shift from some external influence.');
+      }
+    }
+    hide_tabs(lstat);
+  }, 15000);
   
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
@@ -93,6 +102,7 @@ function update_log(newval) {
 }
 
 function load_riddles() {
+  ret = null;
   $.ajax({
     url: "getriddle",
     type: 'get',
@@ -101,9 +111,11 @@ function load_riddles() {
       // Fill each tabspan with their content -- response keys are span ids
       $(".tabspan").each( function() {
         $(this).html(data[$(this).attr('id')]);
+        ret = data['rstat'];
       });
     }
   });
+  return ret
 }
 
 function hide_tabs(lst) {

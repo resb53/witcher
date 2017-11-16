@@ -339,6 +339,16 @@ def reset():
   level = 'room'
   return ('Escape Reset Successfully.', 200)
 
+@app.route("/rstat", methods = ['POST'])
+def updateStat():
+  global rstat
+  data = request.form
+  if 'rstat' in data:
+    rstat |= data['rstat']
+    return ('rstat successful', 200)
+  else:
+    return ('rstat form corrupted.', 400)
+
 @app.route("/js/<path:path>")
 def send_js(path):
   return send_from_directory('js', path)
