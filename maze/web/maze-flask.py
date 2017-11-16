@@ -5,6 +5,10 @@ from flask import Flask, render_template, send_from_directory, request
 import sys
 import json
 
+#         cvpr
+lstat = 0b0000
+rstat = 0b0000
+
 # Prepare maze details
 with open('maze.json', 'r') as f:
   maze = json.load(f)

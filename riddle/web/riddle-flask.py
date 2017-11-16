@@ -16,6 +16,7 @@ answers = { '#cyantab':   { 'solution': 'fire',
                             'code': 0b0010 }, 
             '#redtab':    { 'solution': 'bridge',
                             'code': 0b0001 } }
+#         cvpr
 lstat = 0b0000
 rstat = 0b0000
 

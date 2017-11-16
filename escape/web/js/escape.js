@@ -22,6 +22,9 @@ $(document).ready(function() {
       success: function(data) {
         // Display response
         update_log(data['msg']);
+        if (data['complete']) {
+          update_log(data['complete'])
+        }
       }
     });
   });

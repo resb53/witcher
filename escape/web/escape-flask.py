@@ -16,6 +16,13 @@ commands = { '?': 'Shows the help text for a command.',
              'inv': 'Focus on your inventory insteam of the room.',
              'back': 'Backs away from an object or your inventory to take a wider look.',
              'room': 'Take a step back to view the room as a whole' }
+#         cvpr
+lstat = 0b0000
+rstat = 0b0000
+
+statLevel = { 'cyan-keyhole': 8,
+              'violet-keyhole': 4,
+              'red-keyhole': 1 }
 
 # Something about current level, to vary between looking around the room and in more detail. A counter?
 # A global to hold the current item of focus? Use 'room' for this and as the base root?
@@ -65,7 +72,7 @@ def decrementLock(l):
 
 # Execute a valid command (checked in process_query)
 def doCommand(com):
-  global theroom
+  global theroom, lstat
   ret = { 'msg': 'default response' }
   # Process per command
   # List available commands
@@ -203,6 +210,14 @@ def doCommand(com):
             # Update the description with the success message
             theroom[level]['onuse'] = [ { 'description': theroom[level]['combine'][com[1]]['success'] } ]
             theroom[level]['description'] = theroom[level]['combine'][com[1]]['success']
+            # Update lstat (binary or based on which puzzle has been solved)
+            lstat |= statLevel[level]
+            print('lstat = ' + str(lstat), file=sys.stderr)
+            # Complete whole puzzle if all 3 done
+            if lstat == 13:
+              lstat |= 2 # Purple complete.
+              print('lstat = ' + str(lstat), file=sys.stderr)
+              ret['complete'] = 'The wall shudders, and light begins to appear along hinges and joints. The wall parts opening a doorway, and you are free to leave the room. Congratulations! Now tell the DM.'
             # TELL THE SERVER
             # foo
         else:
