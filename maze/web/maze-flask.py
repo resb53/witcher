@@ -129,7 +129,7 @@ def getLoc():
 def sendrstat():
   if lstat & 8 == 8:
     c = requests.post("http://riddle.morphygames.co.uk/rstat", data={'rstat': 0b1000} )
-  if lstat & 4 == 4:
+  #if lstat & 4 == 4:
     #v = requests.post("http://maze.morphygames.co.uk/rstat", data={'rstat': 0b0100} )
   if lstat & 2 == 2:
     p = requests.post("http://escape.morphygames.co.uk/rstat", data={'rstat': 0b0010} )

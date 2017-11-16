@@ -24,6 +24,7 @@ WORKDIR /app
 # basic flask environment
 RUN apk add --no-cache bash python3 \
   && pip3 install --upgrade pip \
-  && pip3 install flask
+  && pip3 install flask \
+  && pip3 install requests
 
 CMD ["flask", "run", "--host", "0.0.0.0", "--port", "31333"]
