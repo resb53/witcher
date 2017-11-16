@@ -6,6 +6,7 @@ import sys
 import json
 import re
 import codecs
+import requests
 
 # App logic
 answers = { '#cyantab':   { 'solution': 'fire',
@@ -81,6 +82,7 @@ def checkAnswer(riddle,answer):
   # Compare and report
   if answer == answers[riddle]['solution']:
     lstat |= answers[riddle]['code']
+    sendrstat()
     print('lstat = ' + str(lstat), file=sys.stderr)
     remain = 4 - bin(lstat).count('1')
     if remain > 0:
@@ -89,6 +91,17 @@ def checkAnswer(riddle,answer):
       return "Congratulations! " + answer[0].upper() + answer[1:] + " is correct. You're done, feel free to leave, and good luck!"
   else:
     return "I'm sorry, " + answer + " is not the answer I'm looking for. Please try again."
+
+# Outwards comms
+def sendrstat():
+  if lstat & 8 == 8:
+    #c = requests.post("http://riddle.morphygames.co.uk/rstat", data={'rstat': 0b1000} )
+  if lstat & 4 == 4:
+    v = requests.post("http://maze.morphygames.co.uk/rstat", data={'rstat': 0b0100} )
+  if lstat & 2 == 2:
+    p = requests.post("http://escape.morphygames.co.uk/rstat", data={'rstat': 0b0010} )
+  if lstat & 1 == 1:
+    print("!!!RED ACHIEVED!!!", file=sys.stderr)
 
 # Create webapp
 app = Flask(__name__)

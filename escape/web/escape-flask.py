@@ -4,6 +4,7 @@ from flask import Flask, render_template, send_from_directory, request
 
 import sys
 import json
+import requests
 
 # App logic
 commands = { '?': 'Shows the help text for a command.',
@@ -250,6 +251,7 @@ def doCommand(com):
             # Update lstat (binary or based on which puzzle has been solved)
             lstat |= statLevel[level]
             print('lstat = ' + str(lstat), file=sys.stderr)
+            sendrstat()
             # Complete whole puzzle if all 3 done
             if lstat == 13:
               lstat |= 2 # Purple complete.
@@ -308,6 +310,17 @@ def doCommand(com):
     else:
       ret['msg'] = 'Error: \'clue\' must be used as a single command or with \'request\'.'
   return ret
+
+# Outwards comms
+def sendrstat():
+  if lstat & 8 == 8:
+    c = requests.post("http://riddle.morphygames.co.uk/rstat", data={'rstat': 0b1000} )
+  if lstat & 4 == 4:
+    v = requests.post("http://maze.morphygames.co.uk/rstat", data={'rstat': 0b0100} )
+  if lstat & 2 == 2:
+    #p = requests.post("http://escape.morphygames.co.uk/rstat", data={'rstat': 0b0010} )
+  if lstat & 1 == 1:
+    print("!!!RED ACHIEVED!!!", file=sys.stderr)
 
 # Create webapp
 app = Flask(__name__)

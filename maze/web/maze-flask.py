@@ -4,6 +4,7 @@ from flask import Flask, render_template, send_from_directory, request
 
 import sys
 import json
+import requests
 
 #         cvpr
 lstat = 0b0000
@@ -124,6 +125,17 @@ def getLoc():
            "top": top,
            "rstat": bin(rstat).count('1') }
 
+# Outwards comms
+def sendrstat():
+  if lstat & 8 == 8:
+    c = requests.post("http://riddle.morphygames.co.uk/rstat", data={'rstat': 0b1000} )
+  if lstat & 4 == 4:
+    #v = requests.post("http://maze.morphygames.co.uk/rstat", data={'rstat': 0b0100} )
+  if lstat & 2 == 2:
+    p = requests.post("http://escape.morphygames.co.uk/rstat", data={'rstat': 0b0010} )
+  if lstat & 1 == 1:
+    print("!!!RED ACHIEVED!!!", file=sys.stderr)
+
 # Create webapp
 app = Flask(__name__)
 
@@ -180,7 +192,7 @@ def navigate():
 
 @app.route("/doaction")
 def doAction():
-  global act, maze
+  global act, maze, lstat
   args = request.args
   print(args, file=sys.stderr)
   if "t" in args:
@@ -189,8 +201,16 @@ def doAction():
     if act[tile]:
       if tile == "ex":
         maze[cardinals[curDir]][curPos] = "md"
+        lstat |= 0b0100
       else:
         maze[cardinals[curDir]][curPos] = "od"
+        if args['t'] == 'dyn':
+          lstat |= 0b0001
+        elif args['t'] == 'dde':
+          lstat |= 0b0010
+        elif args['t'] == 'nne':
+          lstat |= 0b1000
+      sendrstat()
       act[tile] = 0
 
     return json.dumps(getLoc(), separators=(',',':'))
