@@ -68,19 +68,6 @@ $(document).ready(function() {
     load_riddles();
   }, 15000);
 
-  // Test rstat
-  /*setTimeout(function() {
-    $.ajax({
-      url: '/rstat',
-      type: 'post',
-      dataType: 'json',
-      data: {'rstat': 4},
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }, 20000);*/
-  
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
     //update_log($(this).attr('id') + ' clicked.');

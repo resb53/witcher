@@ -2,43 +2,6 @@
 $(document).ready(function() {
   $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"] + "?t=" + loc["tile"] + loc["face"]);
   populateArrows();
-
-  // Test rstat
-  /*setTimeout(function() {
-    $.ajax({
-      url: '/rstat',
-      type: 'post',
-      dataType: 'json',
-      data: {'rstat': 1},
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }, 20000);
-
-  setTimeout(function() {
-    $.ajax({
-      url: '/rstat',
-      type: 'post',
-      dataType: 'json',
-      data: {'rstat': 3},
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }, 40000);
-
-  setTimeout(function() {
-    $.ajax({
-      url: '/rstat',
-      type: 'post',
-      dataType: 'json',
-      data: {'rstat': 7},
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }, 60000);*/
 });
 
 // Catch movement keypresses

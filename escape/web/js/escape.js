@@ -32,19 +32,6 @@ $(document).ready(function() {
     });
   });
 
-  // Test rstat
-  /*setTimeout(function() {
-    $.ajax({
-      url: '/rstat',
-      type: 'post',
-      dataType: 'json',
-      data: {'rstat': 4},
-      success: function(data) {
-        console.log(data);
-      }
-    });
-  }, 20000);*/
-
   // Handle text bar when empty / focussed / etc.
   $("#command").focus( function(e) {
     if ($(this).is(".empty")) {
