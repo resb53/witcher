@@ -2,6 +2,43 @@
 $(document).ready(function() {
   $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"] + "?t=" + loc["tile"] + loc["face"]);
   populateArrows();
+
+  // Test rstat
+  /*setTimeout(function() {
+    $.ajax({
+      url: '/rstat',
+      type: 'post',
+      dataType: 'json',
+      data: {'rstat': 1},
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }, 20000);
+
+  setTimeout(function() {
+    $.ajax({
+      url: '/rstat',
+      type: 'post',
+      dataType: 'json',
+      data: {'rstat': 3},
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }, 40000);
+
+  setTimeout(function() {
+    $.ajax({
+      url: '/rstat',
+      type: 'post',
+      dataType: 'json',
+      data: {'rstat': 7},
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }, 60000);*/
 });
 
 // Catch movement keypresses
@@ -42,6 +79,16 @@ var navigate = function(a) {
     loc = data
     $("#view").fadeTo(250, 0.7, function() {
       $("#view").attr("src","img/" + loc["zone"] + "/" + loc["image"]).fadeTo(250, 1);
+      // Move on the map
+      $("#you").css('left',loc["left"]);
+      $("#you").css('top',loc["top"]);
+      // Check rstat
+      if (loc["rstat"] > 0) {
+        $("#map").show();
+        if (loc["rstat"] == 2) $("#minimap").attr("src","img/mape.png");
+        if (loc["rstat"] == 3) $("#minimap").attr("src","img/mapf.png");
+      }
+      // Draw arrows
       populateArrows();
       navok = true;
     });

@@ -110,13 +110,19 @@ def breakdownLoc(pos):
 # Prepare object to return to JS
 def getLoc():
   tile = maze[cardinals[curDir]][curPos]
-
+  # get pixels for minimap
+  [top, left] = curPos
+  top = int(axes.index(top) * 10 - 299)
+  left = int(axes.index(left) * 10 - 145)
   return { "face": cardinals[curDir],
            "tile": curPos,
            "zone": getColour(curPos),
            "image": tiles[tile],
            "allowed": options[tile],
-           "action": act }
+           "action": act,
+           "left": left,
+           "top": top,
+           "rstat": bin(rstat).count('1') }
 
 # Create webapp
 app = Flask(__name__)
@@ -176,6 +182,7 @@ def navigate():
 def doAction():
   global act, maze
   args = request.args
+  print(args, file=sys.stderr)
   if "t" in args:
     # Try to do the action
     tile = maze[cardinals[curDir]][curPos]
@@ -203,6 +210,7 @@ def reset():
           "or": 1,
           "op": 1,
           "ex": 1 }
+  lstat = 0b0000
   
   return ('Maze Reset Successfully.', 200)
 
@@ -210,8 +218,9 @@ def reset():
 def updateStat():
   global rstat
   data = request.form
+  print(data, file=sys.stderr)
   if 'rstat' in data:
-    rstat |= data['rstat']
+    rstat |= int(data['rstat'])
     return ('rstat successful', 200)
   else:
     return ('rstat form corrupted.', 400)

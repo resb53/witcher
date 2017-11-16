@@ -22,6 +22,15 @@ img {
 #map {
   display: none;
 }
+#minimap {
+  position: relative;
+  bottom: 0;
+}
+#you {
+  position: relative;
+  top: -299px;
+  left: -145px;
+}
 table {
   border: none;
   margin: 0 auto;
