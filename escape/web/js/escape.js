@@ -22,12 +22,28 @@ $(document).ready(function() {
       success: function(data) {
         // Display response
         update_log(data['msg']);
+        if (data['rstat']) {
+          update_log(data['rstat']);
+        }
         if (data['complete']) {
           update_log(data['complete'])
         }
       }
     });
   });
+
+  // Test rstat
+  /*setTimeout(function() {
+    $.ajax({
+      url: '/rstat',
+      type: 'post',
+      dataType: 'json',
+      data: {'rstat': 4},
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }, 20000);*/
 
   // Handle text bar when empty / focussed / etc.
   $("#command").focus( function(e) {

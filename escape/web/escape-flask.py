@@ -20,6 +20,7 @@ commands = { '?': 'Shows the help text for a command.',
 #         cvpr
 lstat = 0b0000
 rstat = 0b0000
+oldrstat = 0b0000
 
 statLevel = { 'cyan-keyhole': 8,
               'violet-keyhole': 4,
@@ -317,6 +318,7 @@ def index():
 
 @app.route("/query", methods = ['POST'])
 def process_query():
+  global oldrstat, clues
   data = request.form
   print(data, file=sys.stderr)
   if 'command' in data:
@@ -326,14 +328,20 @@ def process_query():
       response = doCommand(comlist)
     else:
       response = { 'msg' : 'Error: command not recognised. Use ? to list available commands, and ? followed by a command for more info.' }
+    # Check for rstat changes
+    if rstat != oldrstat:
+      response['rstat'] = 'Due to an external influence you have been granted an additional clue.'
+      clues += 1
+      oldrstat = rstat
   else:
     response = { 'msg' : "There seems to have been a problem. Please inform the DM." }
   return json.dumps(response)
 
 @app.route("/reset")
 def reset():
-  global theroom, cluelist, lstat, clues, level
+  global theroom, cluelist, lstat, clues, level, oldrstat
   lstat = 0b0000
+  oldrstat = rstat
   clues = initclues + bin(rstat).count("1")
   theroom, cluelist = loadRoom()
   level = 'room'
@@ -343,8 +351,9 @@ def reset():
 def updateStat():
   global rstat
   data = request.form
+  print(data, file=sys.stderr)
   if 'rstat' in data:
-    rstat |= data['rstat']
+    rstat |= int(data['rstat'])
     return ('rstat successful', 200)
   else:
     return ('rstat form corrupted.', 400)
