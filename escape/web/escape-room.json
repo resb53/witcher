@@ -11,7 +11,7 @@
     "children": [ "bookcase", "table", "painting", "bush", "door", "rug", "chest" ],
     "size": "large",
     "onuse": [],
-    "combine": { "grid-note": { "description": "Comparing the grid-note to the room, you identify a maching patch of masonry. Following the coordinates leads you to a loose-stone.", "update": { "children": ["bookcase","table","painting","bush","door","rug","chest","loose-stone"] } } },
+    "combine": { "grid-note": { "description": "Comparing the grid-note to the room, you identify a maching patch of masonry. Following the coordinates leads you to a loose-stone.", "extend": { "children": ["loose-stone"] } } },
     "description": "You are in a small 4-walled room. The walls and floor are bare, cut stone.",
     "img": "Room.png"
   },
@@ -266,7 +266,7 @@
     "children": [],
     "size": "fixed",
     "onuse": [ { "description": { "locked": "The drawer won't budge. It appears to be locked.", "unlocked": "Now unlocked, the drawer can easily be opened and closed." } } ],
-    "combine": { "small-key": { "description": "The small key fits neatly in the hole, and turns easily. There's a small click as the drawer is unlocked.", "update": { "status": "unlocked", "children": ["jewelry-box","dice-2","red-key-2"] } } },
+    "combine": { "small-key": { "description": "The small key fits neatly in the hole, and turns easily. There's a small click as the drawer is unlocked.", "update": { "status": "unlocked", "children": ["jewellery-box","dice-2","red-key-2"] } } },
     "status": "locked",
     "description": { "locked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath.", "unlocked": "A wide wooden draw with a more elaborate handle and a small keyhole beneath." },
     "img": "Table.png"
@@ -323,13 +323,13 @@
     "description": "A well-crafted wooden dice, with an odd numbering system. It seems to have 3 faces with 1 spot, 2 faces with 2 spots, and 1 with 3 spots.",
     "img": "Table.png"
   },
-  "jewelry-box": {
+  "jewellery-box": {
     "parent": "drawer-two",
     "children": [],
     "size": "small",
     "onuse": [ { "description": { "locked": "The lid appears to be firmly held closed by a lock.", "unlocked": "The unlocked box opens and closes easily." } } ],
     "status": "locked",
-    "description": { "locked": "A fancy, stylish jewelry box of various shaded metals. It has 6 dials on the front that each rotate to present various letters.", "unlocked": "A fancy, stylish jewelry box of various shaded metals with a solved combination lock." },
+    "description": { "locked": "A fancy, stylish jewellery box of various shaded metals. It has 6 dials on the front that each rotate to present various letters.", "unlocked": "A fancy, stylish jewellery box of various shaded metals with a solved combination lock." },
     "solve": { "solution": "golden", "description": "Rotating the letters into place, the word 'golden' pops the lid of the box open.", "update": { "status": "unlocked", "children": ["violet-key-1"] } },
     "img": "Table.png"
   },
@@ -496,7 +496,7 @@
     "img": "Key.png"
   },
   "violet-key-1": {
-    "parent": "jewelry-box",
+    "parent": "jewellery-box",
     "children": [],
     "size": "small",
     "onuse": [ { "description": "This is only half a key, with a groove to attach another half. You'll need to combine the two for it to be useful." } ],

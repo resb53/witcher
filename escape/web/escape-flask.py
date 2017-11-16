@@ -179,6 +179,10 @@ def doCommand(com):
               else:
                 theroom[oldlevel].pop('combine')
                 theroom[com[1]].pop('combine')
+                # Unlock the solved puzzle if it was locked
+                for l in [ oldlevel, com[1] ]:
+                  if 'status' in theroom[l]:
+                    theroom[l]['status'] = 'unlocked'
             else:
               ret['msg'] = setmsg
           # If not, see it any status is changed
@@ -188,13 +192,17 @@ def doCommand(com):
                 theroom[level][key] = theroom[level]['combine'][com[1]]['update'][key]
               else:
                 decrementLock(theroom[level]['parent'])
+          # Or perhaps we're just appending items rather than updating
+          elif 'extend' in theroom[level]['combine'][com[1]]:
+            for key in theroom[level]['combine'][com[1]]['extend'].keys():
+              theroom[level][key].extend(theroom[level]['combine'][com[1]]['extend'][key])
           # Carry out actions if a major keyhole has been completed
           elif 'success' in theroom[level]['combine'][com[1]]:
             # The key is now locked
             theroom.pop(com[1])
             # Update the description with the success message
-            theroom[level]['onuse'] = [ { 'description': theroom[level]['combine'][com[1]] } ]
-            theroom[level]['description'] = theroom[level]['combine'][com[1]]
+            theroom[level]['onuse'] = [ { 'description': theroom[level]['combine'][com[1]]['success'] } ]
+            theroom[level]['description'] = theroom[level]['combine'][com[1]]['success']
             # TELL THE SERVER
             # foo
         else:
