@@ -15,7 +15,8 @@ commands = { '?': 'Shows the help text for a command.',
              'solve': 'Use with a solution word or number to solve the current focused item\'s puzzle.',
              'inv': 'Focus on your inventory insteam of the room.',
              'back': 'Backs away from an object or your inventory to take a wider look.',
-             'room': 'Take a step back to view the room as a whole' }
+             'room': 'Take a step back to view the room as a whole',
+             'clue': 'Check how many clues you can use. \'clue request\' will request a clue.'}
 #         cvpr
 lstat = 0b0000
 rstat = 0b0000
@@ -28,15 +29,46 @@ statLevel = { 'cyan-keyhole': 8,
 # A global to hold the current item of focus? Use 'room' for this and as the base root?
 # OOP. ish. Have a load of JSON object wiht parameters that affect how the base commands handle them.
 level = 'room'
+initclues = 2
+clues = 2
 
 # Get the riddle text
 def loadRoom():
   with open('escape-room.json', 'r') as f:
     roomjson = json.load(f)
     f.close()
-  return roomjson
+  with open('escape-clues.json', 'r') as f:
+    cluejson = json.load(f)
+    f.close()
+  return roomjson, cluejson
 
-theroom = loadRoom()
+theroom, cluelist = loadRoom()
+
+# Enable clues
+def getClue():
+  global clues, cluelist
+  if clues > 0:
+    for c in cluelist:
+      if (not c['used']):
+        if c['valid'][1] == 'children':
+          if (c['valid'][2] in theroom[c['valid'][0]]['children']) == c['valid'][3]:
+            c['used'] = True
+            clues -=  1
+            return c['clue']
+        elif c['valid'][1] == 'onuse':
+          if (len(theroom[c['valid'][0]]['onuse']) == c['valid'][2]) == c['valid'][3]:
+            c['used'] = True
+            clues -=  1
+            return c['clue']
+        elif c['valid'][1] == 'status':
+          if (theroom[c['valid'][0]]['status'] == c['valid'][2]) == c['valid'][3]:
+            c['used'] = True
+            clues -=  1
+            return c['clue']
+    return 'There are no more clues to be had. You\'re nearly there!' 
+  else:
+    return 'You currently have no usable clues.'
+    
 
 # Only allow changing the current level after checking it exists
 def setLevel(l):
@@ -76,7 +108,7 @@ def decrementLock(l):
 
 # Execute a valid command (checked in process_query)
 def doCommand(com):
-  global theroom, lstat
+  global theroom, lstat, clues
   ret = { 'msg': 'default response' }
   # Process per command
   # List available commands
@@ -266,6 +298,14 @@ def doCommand(com):
   # Back away to the room level
   elif com[0] == 'room':
     ret['msg'] = setLevel('room')
+  # Clues
+  elif com[0] == 'clue':
+    if len(com) == 1:
+      ret['msg'] = 'You currently have ' + str(clues) + ' clue(s) remaining. Use \'clue request\' to request a clue.'
+    elif len(com) == 2 and com[1] == 'request':
+      ret['msg'] = getClue()
+    else:
+      ret['msg'] = 'Error: \'clue\' must be used as a single command or with \'request\'.'
   return ret
 
 # Create webapp
@@ -292,9 +332,11 @@ def process_query():
 
 @app.route("/reset")
 def reset():
-  global theroom, lstat
+  global theroom, cluelist, lstat, clues, level
   lstat = 0b0000
-  theroom = loadRoom()
+  clues = initclues + bin(rstat).count("1")
+  theroom, cluelist = loadRoom()
+  level = 'room'
   return ('Escape Reset Successfully.', 200)
 
 @app.route("/js/<path:path>")

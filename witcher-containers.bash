@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-GAMEHOST="morphygames.co.uk"
+GAMEHOST="morphygames.local"
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
