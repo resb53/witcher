@@ -30,9 +30,13 @@ statLevel = { 'cyan-keyhole': 8,
 level = 'room'
 
 # Get the riddle text
-with open('escape-room.json', 'r') as f:
-  theroom = json.load(f)
-  f.close()
+def loadRoom():
+  with open('escape-room.json', 'r') as f:
+    roomjson = json.load(f)
+    f.close()
+  return roomjson
+
+theroom = loadRoom()
 
 # Only allow changing the current level after checking it exists
 def setLevel(l):
@@ -285,6 +289,13 @@ def process_query():
   else:
     response = { 'msg' : "There seems to have been a problem. Please inform the DM." }
   return json.dumps(response)
+
+@app.route("/reset")
+def reset():
+  global theroom, lstat
+  lstat = 0b0000
+  theroom = loadRoom()
+  return ('Escape Reset Successfully.', 200)
 
 @app.route("/js/<path:path>")
 def send_js(path):

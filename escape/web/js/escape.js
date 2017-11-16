@@ -38,9 +38,12 @@ $(document).ready(function() {
   });
   $("#command").blur( function(e) {
     if ($(this).val() == '' && $(this).not(".empty")) {
-      $(this).val('Enter solutions here...').addClass('empty');
+      $(this).val('Enter commands here...').addClass('empty');
     }
   });
+
+  // Print welcome text.
+  update_log("Welcome to the Drondathar Escape adventure. Use the ? command for help, and '? cmd' to gain further information on use of cmd");
 });
 
 function update_log(newval) {
