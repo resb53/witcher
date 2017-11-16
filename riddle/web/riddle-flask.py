@@ -81,6 +81,7 @@ def checkAnswer(riddle,answer):
   # Compare and report
   if answer == answers[riddle]['solution']:
     lstat |= answers[riddle]['code']
+    print('lstat = ' + str(lstat), file=sys.stderr)
     remain = 4 - bin(lstat).count('1')
     if remain > 0:
       return "That's right! " + answer[0].upper() + answer[1:] + " is correct. This will surely aid your allies. " + str(remain) + " to go."
