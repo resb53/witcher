@@ -1,5 +1,6 @@
 // Globals
-var curtab = ''
+var curtab = '';
+var rstat = 0;
 
 // Code for initialising the view
 $(document).ready(function() {
@@ -35,7 +36,8 @@ $(document).ready(function() {
           // Display response
           update_log(data['msg']);
           // Update visible tablets
-          hide_tabs(data['lstat']);
+          lstat = data['lstat'];
+          hide_tabs(lstat);
           // Complete if finished
           if ( (data['lstat'] & 15) == 15) $("#base").attr("src","img/Winner.png");
         }
@@ -60,17 +62,24 @@ $(document).ready(function() {
   });
 
   // Load text into tablets and show/hide solved tabs. Check for updates every 15 seconds
-  rstat = 0;
+  load_riddles();
+  // Refresh every 15 seconds. Report changes.
   setInterval(function() {
-    ret = load_riddles();
-    if (ret) {
-      if (rstat != ret) {
-        rstat = ret;
-        update_log('The runes on the tablets shift from some external influence.');
-      }
-    }
-    hide_tabs(lstat);
+    load_riddles();
   }, 15000);
+
+  // Test rstat
+  /*setTimeout(function() {
+    $.ajax({
+      url: '/rstat',
+      type: 'post',
+      dataType: 'json',
+      data: {'rstat': 4},
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  }, 20000);*/
   
   // Handle clicks on tablets
   $(".tablet").click( function(e) {
@@ -102,7 +111,6 @@ function update_log(newval) {
 }
 
 function load_riddles() {
-  ret = null;
   $.ajax({
     url: "getriddle",
     type: 'get',
@@ -111,11 +119,13 @@ function load_riddles() {
       // Fill each tabspan with their content -- response keys are span ids
       $(".tabspan").each( function() {
         $(this).html(data[$(this).attr('id')]);
-        ret = data['rstat'];
       });
+      if (rstat != data['rstat']) {
+        update_log('The runes on the tablets shift from some external influence.');
+        rstat = data['rstat'];
+      }
     }
   });
-  return ret
 }
 
 function hide_tabs(lst) {

@@ -40,7 +40,7 @@ def getRiddle():
   # Cyan, plaintext
 
   # Violet, reverse
-  if rstat & 4 == 4:
+  if rstat & 4 != 4:
     for i, s in enumerate(riddle['violettext']):
       # Decapitalise first
       s = s[:1].lower() + s[1:]
@@ -54,13 +54,13 @@ def getRiddle():
       riddle['violettext'][i] = s[:1].upper() + s[1:]
 
   # red rot cipher
-  if rstat & 1 == 1:
+  if rstat & 1 != 1:
     enc = codecs.getencoder( "rot-13" )
     for i, s in enumerate(riddle['redtext']):
       riddle['redtext'][i] = enc( s )[0]
 
   # purple tr map
-  if rstat & 2 == 2:
+  if rstat & 2 != 2:
     for i, s in enumerate(riddle['purpletext']):
       riddle['purpletext'][i] = s.translate(str.maketrans('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
                                                           'omktavgyezcjnbudxwfpirlshqOMKTAVGYEZCJNBUDXWFPIRLSHQ'))
@@ -124,8 +124,9 @@ def reset():
 def updateStat():
   global rstat
   data = request.form
+  print(data, file=sys.stderr)
   if 'rstat' in data:
-    rstat |= data['rstat']
+    rstat |= int(data['rstat'])
     return ('rstat successful', 200)
   else:
     return ('rstat form corrupted.', 400)
